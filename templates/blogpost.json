@@ -1,0 +1,90 @@
+{
+  "id": "string",
+  "title": "string",
+  "slug": "string",
+  "summary": "string",
+  "status": "draft|published|archived|deleted",
+  "content": {
+    "format": "markdown|html",
+    "body": "string",
+    "media_attachments": [
+      {
+        "id": "string",
+        "type": "image|video|audio|document",
+        "url": "string",
+        "alt_text": "string",
+        "caption": "string",
+        "file_size": "number",
+        "mime_type": "string"
+      }
+    ]
+  },
+  "featured_image": {
+    "url": "string",
+    "alt_text": "string",
+    "caption": "string"
+  },
+  "author": {
+    "user_id": "string",
+    "name": "string",
+    "avatar_url": "string"
+  },
+  "creation_date": "ISO_8601_datetime",
+  "publish_date": "ISO_8601_datetime",
+  "last_modified": "ISO_8601_datetime",
+  "revision_history": [
+    {
+      "version": "number",
+      "timestamp": "ISO_8601_datetime",
+      "user_id": "string",
+      "changes_summary": "string",
+      "previous_version_id": "string"
+    }
+  ],
+  "expiration": {
+    "expires_at": "ISO_8601_datetime",
+    "auto_archive": "boolean"
+  },
+  "permissions": {
+    "read": {
+      "type": "public|role_based|user_based|password|private",
+      "roles": ["string"],
+      "users": ["string"]
+    },
+    "write": {
+      "type": "author_only|role_based|user_based",
+      "roles": ["string"],
+      "users": ["string"]
+    },
+    "delete": {
+      "type": "author_only|role_based|user_based",
+      "roles": ["string"],
+      "users": ["string"]
+    },
+    "moderate": {
+      "roles": ["string"],
+      "users": ["string"]
+    },
+    "inherit_from_category": "boolean"
+  },
+  "taxonomy": {
+    "categories": ["string"],
+    "tags": ["string"]
+  },
+  "seo": {
+    "meta_title": "string",
+    "meta_description": "string",
+    "keywords": ["string"]
+  },
+  "analytics": {
+    "view_count": "number",
+    "like_count": "number",
+    "dislike_count": "number",
+    "comment_count": "number"
+  },
+  "settings": {
+    "allow_comments": "boolean",
+    "featured": "boolean",
+    "sticky": "boolean"
+  }
+}
