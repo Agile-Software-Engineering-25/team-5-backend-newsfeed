@@ -1,0 +1,10 @@
+PUT http://localhost:8080/api/blogposts
+Content-Type: application/json
+
+{
+  "id": "1",
+  "title": "My First Blog Post",
+  "content": {
+    "body": "Hello, world!"
+  }
+}
