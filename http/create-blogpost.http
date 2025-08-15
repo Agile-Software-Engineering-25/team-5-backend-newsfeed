@@ -2,9 +2,25 @@ PUT http://localhost:8080/api/blogposts
 Content-Type: application/json
 
 {
-  "id": "1",
-  "title": "My First Blog Post",
+  "title": "My First Blog Post3",
   "content": {
-    "body": "Hello, world!"
+    "body": "Hello, world!3"
   }
 }
+
+###
+
+PUT http://localhost:8080/api/blogposts/1
+Content-Type: application/json
+
+{
+  "title": "updated blog post",
+  "content": {
+    "body": "Hello, world!3"
+  }
+}
+
+###
+
+DELETE http://localhost:8080/api/blogposts/653ba6a4-ba0b-4d73-89e5-f907a6dc8fba
+Content-Type: application/json

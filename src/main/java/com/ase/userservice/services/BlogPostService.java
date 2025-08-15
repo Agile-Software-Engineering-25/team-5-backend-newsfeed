@@ -20,4 +20,8 @@ public class BlogPostService {
   public BlogPost saveBlogPost(BlogPost blogPost) {
     return repository.save(blogPost);
   }
+
+  public void deleteBlogPost(String id) {
+    repository.deleteById(id);
+  }
 }

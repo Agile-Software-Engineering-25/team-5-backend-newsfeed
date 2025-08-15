@@ -8,14 +8,15 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import lombok.Data;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
 public class BlogPost {
-  @Id
-  private String id;
+  @Id @Column(nullable = false, updatable = false) private String id;
   private String title;
   private String slug;
   private String summary;
@@ -47,6 +48,14 @@ public class BlogPost {
   @Embedded private BlogSEO seo;
   @Embedded private BlogAnalytics analytics;
   @Embedded private BlogSettings settings;
+
+  // UUID gen
+  @PrePersist
+  public void ensureId() {
+    if (this.id == null) {
+      this.id = UUID.randomUUID().toString();
+    }
+  }
 
   @Embeddable
   @Data
