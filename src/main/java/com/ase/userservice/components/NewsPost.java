@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-public class BlogPost {
+public class NewsPost {
   @Id @Column(nullable = false, updatable = false) private String id;
   private String title;
   private String slug;
@@ -27,7 +27,7 @@ public class BlogPost {
   private String creationDate;
   private String publishDate;
   private String lastModified;
-  @ElementCollection List<BlogRevision> revisionHistory;
+  @ElementCollection List<NewsRevision> revisionHistory;
   @Embedded private Expiration expiration;
   @Embedded
   @AttributeOverrides({
@@ -43,11 +43,11 @@ public class BlogPost {
       @AttributeOverride(name = "moderate.roles", column = @Column(name = "moderate_roles")),
       @AttributeOverride(name = "moderate.users", column = @Column(name = "moderate_users"))
   })
-  private BlogPermissions permissions;
-  @Embedded private BlogTaxonomy taxonomy;
-  @Embedded private BlogSEO seo;
-  @Embedded private BlogAnalytics analytics;
-  @Embedded private BlogSettings settings;
+  private NewsPermissions permissions;
+  @Embedded private NewsTaxonomy taxonomy;
+  @Embedded private NewsSEO seo;
+  @Embedded private NewsAnalytics analytics;
+  @Embedded private NewsSettings settings;
 
   // UUID gen
   @PrePersist
@@ -63,12 +63,12 @@ public class BlogPost {
     private String format;
     private String body;
     @ElementCollection
-    private List<BlogMediaAttachment> mediaAttachments;
+    private List<NewsMediaAttachment> mediaAttachments;
   }
 
   @Embeddable
   @Data
-  public static class BlogMediaAttachment {
+  public static class NewsMediaAttachment {
     private String id;
     private String type;
     private String url;
@@ -96,7 +96,7 @@ public class BlogPost {
 
   @Embeddable
   @Data
-  public static class BlogRevision {
+  public static class NewsRevision {
     private Double version;
     private String timestamp;
     private String userId;
@@ -113,17 +113,17 @@ public class BlogPost {
 
   @Embeddable
   @Data
-  public static class BlogPermissions {
-    private BlogPermissionDetail read;
-    private BlogPermissionDetail write;
-    private BlogPermissionDetail delete;
-    private BlogModeratePermission moderate;
+  public static class NewsPermissions {
+    private NewsPermissionDetail read;
+    private NewsPermissionDetail write;
+    private NewsPermissionDetail delete;
+    private NewsModeratePermission moderate;
     private Boolean inheritFromCategory;
   }
 
   @Embeddable
   @Data
-  public static class BlogPermissionDetail {
+  public static class NewsPermissionDetail {
     private String permissionType;
     private List<String> roles;
     private List<String> users;
@@ -131,21 +131,21 @@ public class BlogPost {
 
   @Embeddable
   @Data
-  public static class BlogModeratePermission {
+  public static class NewsModeratePermission {
     private List<String> roles;
     private List<String> users;
   }
 
   @Embeddable
   @Data
-  public static class BlogTaxonomy {
+  public static class NewsTaxonomy {
     private List<String> categories;
     private List<String> tags;
   }
 
   @Embeddable
   @Data
-  public static class BlogSEO {
+  public static class NewsSEO {
     private String metaTitle;
     private String metaDescription;
     private List<String> keywords;
@@ -153,7 +153,7 @@ public class BlogPost {
 
   @Embeddable
   @Data
-  public static class BlogAnalytics {
+  public static class NewsAnalytics {
     private Double viewCount;
     private Double likeCount;
     private Double dislikeCount;
@@ -162,7 +162,7 @@ public class BlogPost {
 
   @Embeddable
   @Data
-  public static class BlogSettings {
+  public static class NewsSettings {
     private Boolean allowComments;
     private Boolean featured;
     private Boolean sticky;

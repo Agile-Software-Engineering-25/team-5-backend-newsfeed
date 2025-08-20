@@ -1,7 +1,7 @@
 package com.ase.userservice.controllers;
 
-import com.ase.userservice.components.BlogPost;
-import com.ase.userservice.services.BlogPostService;
+import com.ase.userservice.components.NewsPost;
+import com.ase.userservice.services.NewsPostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +13,9 @@ import java.util.List;
 
 @RestController
 public class RootController {
-  private final BlogPostService service;
+  private final NewsPostService service;
 
-  public RootController(BlogPostService service) {
+  public RootController(NewsPostService service) {
     this.service = service;
   }
 
@@ -24,27 +24,27 @@ public class RootController {
 		return ResponseEntity.ok("API Root: /api/blogposts/");
 	}
 
-  @GetMapping("/api/blogposts")
-  public ResponseEntity<List<BlogPost>> getAllBlogPosts() {
-    return ResponseEntity.ok(service.getAllBlogPosts());
+  @GetMapping("/api/newsposts")
+  public ResponseEntity<List<NewsPost>> getAllBlogPosts() {
+    return ResponseEntity.ok(service.getAllNewsPosts());
   }
 
-  @PutMapping("/api/blogposts")
-  public ResponseEntity<BlogPost> createBlogPost(@RequestBody BlogPost blogPost) {
-    BlogPost saved = service.saveBlogPost(blogPost);
+  @PutMapping("/api/newsposts")
+  public ResponseEntity<NewsPost> createNewsPost(@RequestBody NewsPost newsPost) {
+    NewsPost saved = service.saveNewsPost(newsPost);
     return ResponseEntity.ok(saved);
   }
 
-  @DeleteMapping("/api/blogposts/{id}")
-  public ResponseEntity<Void> deleteBlogPost(@PathVariable String id) {
-    service.deleteBlogPost(id);
+  @DeleteMapping("/api/newsposts/{id}")
+  public ResponseEntity<Void> deleteNewsPost(@PathVariable String id) {
+    service.deleteNewsPost(id);
     return ResponseEntity.noContent().build();
   }
 
-  @PutMapping("/api/blogposts/{id}")
-  public ResponseEntity<BlogPost> updateBlogPost(@PathVariable String id, @RequestBody BlogPost blogPost) {
-    blogPost.setId(id); // Ensure the ID matches the path
-    BlogPost updated = service.saveBlogPost(blogPost);
+  @PutMapping("/api/newsposts/{id}")
+  public ResponseEntity<NewsPost> updateNewsPost(@PathVariable String id, @RequestBody NewsPost newsPost) {
+    newsPost.setId(id); // Ensure the ID matches the path
+    NewsPost updated = service.saveNewsPost(newsPost);
     return ResponseEntity.ok(updated);
   }
 }
