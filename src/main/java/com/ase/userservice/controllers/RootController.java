@@ -21,7 +21,7 @@ public class RootController {
 
 	@GetMapping("/")
 	public ResponseEntity<String> root() {
-		return ResponseEntity.ok("API Root: /api/blogposts/");
+		return ResponseEntity.ok("API Root: /api/newsposts/");
 	}
 
   @GetMapping("/api/newsposts")
@@ -44,7 +44,7 @@ public class RootController {
   @PutMapping("/api/newsposts/{id}")
   public ResponseEntity<NewsPost> updateNewsPost(@PathVariable String id, @RequestBody NewsPost newsPost) {
     newsPost.setId(id); // Ensure the ID matches the path
-    NewsPost updated = service.saveNewsPost(newsPost);
+    NewsPost updated = service.updateNewsPost(newsPost);
     return ResponseEntity.ok(updated);
   }
 }
