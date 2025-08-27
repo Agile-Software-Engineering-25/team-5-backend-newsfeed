@@ -1,26 +1,30 @@
-PUT http://localhost:8080/api/blogposts
+### Create a new newspost
+PUT http://localhost:8080/api/newsposts
 Content-Type: application/json
 
-{
-  "title": "My First Blog Post3",
-  "content": {
-    "body": "Hello, world!3"
-  }
-}
+{ "title": "My First News Post3", "content": { "body": "Hello, world!" } }
 
-###
+> {%
+    client.global.set("newspostId", response.body.id);
+    client.test("Status is 200", function() {
+        client.assert(response.status === 200);
+    });
+%}
 
-PUT http://localhost:8080/api/blogposts/1
+### Create another newspost
+PUT http://localhost:8080/api/newsposts
 Content-Type: application/json
 
-{
-  "title": "updated blog post",
-  "content": {
-    "body": "Hello, world!3"
-  }
-}
+{ "title": "Second News Post", "content": { "body": "This is my second news post!" } }
 
-###
+> {% client.global.set("secondNewspostId", response.body.id); %}
 
-DELETE http://localhost:8080/api/blogposts/653ba6a4-ba0b-4d73-89e5-f907a6dc8fba
+### Update the second newspost
+PUT http://localhost:8080/api/newsposts/{{secondNewspostId}}
+Content-Type: application/json
+
+{ "title": "Updated Second News Post", "content": { "body": "This is my updated second news post!" } }
+
+### Delete the second newspost
+DELETE http://localhost:8080/api/newsposts/{{secondNewspostId}}
 Content-Type: application/json
