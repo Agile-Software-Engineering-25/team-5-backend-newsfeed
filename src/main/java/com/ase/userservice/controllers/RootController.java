@@ -33,7 +33,7 @@ public class RootController {
 
   @GetMapping("/newsfeed")
   public ResponseEntity<List<NewsPost>> list(@RequestParam(required = false) String filter) {
-    return ResponseEntity.ok(service.getAllNewsPosts());
+    return ResponseEntity.ok(service.getAllNewsPosts(filter));
   }
 
   @PutMapping("/newsfeed/{id}")

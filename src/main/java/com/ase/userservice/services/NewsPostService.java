@@ -15,7 +15,7 @@ public class NewsPostService {
 
   private final NewsPostRepository repository;
 
-  public List<NewsPost> getAllNewsPosts() {
+  public List<NewsPost> getAllNewsPosts(String filter) {
     return repository.findAll();
   }
 
