@@ -86,19 +86,6 @@
             <property name="option" value="alone"/>
         </module>
 
-        <!-- Spacing -->
-
-        <!-- No space before opening parenthesis in method calls -->
-        <module name="MethodParamPad">
-            <property name="option" value="nospace"/>
-        </module>
-
-        <!-- Spaces after commas and certain keywords -->
-        <module name="WhitespaceAfter">
-            <property name="tokens"
-                      value="COMMA, LITERAL_IF, LITERAL_FOR, LITERAL_WHILE, LITERAL_SWITCH, LITERAL_CATCH"/>
-        </module>
-
         <!-- Spaces around operators / wrapping -->
         <module name="OperatorWrap"/>
 
@@ -124,13 +111,6 @@
         <module name="FallThrough">
         </module>
 
-        <!-- Import Ordering -->
-        <module name="ImportOrder">
-            <property name="groups" value="java, javax, org, com"/>
-            <property name="option" value="top"/>
-            <property name="sortStaticImportsAlphabetically" value="true"/>
-        </module>
-
         <!-- Unused imports -->
         <module name="UnusedImports"/>
 
@@ -145,7 +125,7 @@
 
     <!-- Line Length: max 80 characters -->
     <module name="LineLength">
-        <property name="max" value="80"/>
+        <property name="max" value="120"/>
         <property name="ignorePattern" value="^package.*|^import.*|a href|href|http(s)?://.*"/>
     </module>
 
