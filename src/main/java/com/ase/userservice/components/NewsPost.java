@@ -3,11 +3,8 @@ package com.ase.userservice.components;
 import jakarta.persistence.*;
 import jakarta.persistence.Embedded;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 import static com.ase.userservice.components.Embedded.*;

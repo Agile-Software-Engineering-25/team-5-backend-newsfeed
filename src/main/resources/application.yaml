@@ -1,6 +1,8 @@
 spring:
   application:
     name: ASE-UserService
+  main:
+    banner-mode: off
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: false
@@ -14,8 +16,10 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password: password
-  h2.console: path=/h2-console
-  h2.console.enabled: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
 server:
   error:
