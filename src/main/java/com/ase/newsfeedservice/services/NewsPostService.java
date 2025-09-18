@@ -1,8 +1,8 @@
 package com.ase.newsfeedservice.services;
 
-import com.ase.userservice.components.NewsPost;
-import com.ase.userservice.components.NewsPostHistoryItemDto;
-import com.ase.userservice.repositories.NewsPostRepository;
+import com.ase.newsfeedservice.components.NewsPost;
+import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
+import com.ase.newsfeedservice.repositories.NewsPostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
