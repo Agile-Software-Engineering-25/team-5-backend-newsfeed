@@ -75,7 +75,7 @@
                     <archive>
                         <manifest>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            <mainClass>com.ase.newsfeed-service.Application</mainClass>
+                            <mainClass>com.ase.newsfeedservice.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
