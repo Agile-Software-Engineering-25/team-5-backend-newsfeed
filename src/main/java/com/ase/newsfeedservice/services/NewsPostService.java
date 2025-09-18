@@ -39,7 +39,6 @@ import com.ase.newsfeedservice.repositories.NewsPostRepository;
 =======
 import com.ase.userservice.components.NewsPost;
 import com.ase.userservice.components.NewsPostHistoryItemDto;
-import com.ase.userservice.components.NewsPostHistoryItemDto;
 import com.ase.userservice.repositories.NewsPostRepository;
 >>>>>>> aa033ab (init)
 >>>>>>> c62854e (init)
