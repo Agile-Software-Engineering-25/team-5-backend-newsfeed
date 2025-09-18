@@ -1,8 +1,16 @@
 package com.ase.newsfeedservice.services;
+<<<<<<< HEAD
 
 import com.ase.newsfeedservice.components.NewsPost;
 import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
 import com.ase.newsfeedservice.repositories.NewsPostRepository;
+=======
+
+import com.ase.newsfeedservice.components.NewsPost;
+import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
+import com.ase.newsfeedservice.repositories.NewsPostRepository;
+
+>>>>>>> 11758a8 (Namechange for deployment)
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
