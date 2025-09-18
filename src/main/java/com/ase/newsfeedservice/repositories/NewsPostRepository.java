@@ -13,10 +13,22 @@ import java.time.OffsetDateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 4238373 (fixed errors):src/main/java/com/ase/userservice/repositories/NewsPostRepository.java
 >>>>>>> d1a2d60 (fixed errors)
+=======
+<<<<<<< HEAD:src/main/java/com/ase/newsfeedservice/repositories/NewsPostRepository.java
+>>>>>>> 4238373 (fixed errors):src/main/java/com/ase/userservice/repositories/NewsPostRepository.java
+=======
+
+import java.time.OffsetDateTime;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+>>>>>>> f85c7a6 (fixed errors):src/main/java/com/ase/userservice/repositories/NewsPostRepository.java
+>>>>>>> f1cd5ae (fixed errors)
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
