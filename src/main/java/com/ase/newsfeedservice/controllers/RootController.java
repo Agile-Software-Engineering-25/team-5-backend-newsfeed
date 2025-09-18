@@ -112,6 +112,7 @@ public class RootController {
       // Number of items per page, REQUIRED
       @RequestParam int pageSize) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 3d8d8d6 (make the linter shut up)
     return service.listNewsPosts(query, from, to, page, pageSize);
 >>>>>>> d1a2d60 (fixed errors)
@@ -120,6 +121,11 @@ public class RootController {
     Page<NewsPost> newsPage = service.listNewsPosts(query, from, to, page, pageSize);
     
     // Then, return only the content list
+=======
+
+    int zeroBasedPage = page > 0 ? page - 1 : 0;
+    Page<NewsPost> newsPage = service.listNewsPosts(query, from, to, zeroBasedPage, pageSize);
+>>>>>>> aaef08f (make page 1 indexed)
     return newsPage.getContent();
 >>>>>>> 7e4539e (fix data format)
   }
