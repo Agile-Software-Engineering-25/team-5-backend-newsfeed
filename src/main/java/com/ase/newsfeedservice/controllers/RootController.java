@@ -84,18 +84,19 @@ public class RootController {
     return newsPage.getContent();
 =======
   public Page<NewsPost> list(
-    // Optional text search on title and summary
-    @RequestParam(required = false) String query,
+      // Optional text search on title and summary
+      @RequestParam(required = false) String query,
 
-    // Optional start of the date range
-    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime from,
+      // Optional start of the date range
+      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime from,
 
-    // Optional end of the date range
-    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime to,
+      // Optional end of the date range
+      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime to,
 
-    // Page number, REQUIRED
-    @RequestParam int page,
+      // Page number, REQUIRED
+      @RequestParam int page,
 
+<<<<<<< HEAD
     // Number of items per page, REQUIRED
     @RequestParam int pageSize
   ) {
@@ -103,6 +104,10 @@ public class RootController {
     return newsPostService.listNewsPosts(query, from, to, page, pageSize);
 >>>>>>> 4761264 (added queries)
 =======
+=======
+      // Number of items per page, REQUIRED
+      @RequestParam int pageSize) {
+>>>>>>> 3d8d8d6 (make the linter shut up)
     return service.listNewsPosts(query, from, to, page, pageSize);
 >>>>>>> d1a2d60 (fixed errors)
   }
