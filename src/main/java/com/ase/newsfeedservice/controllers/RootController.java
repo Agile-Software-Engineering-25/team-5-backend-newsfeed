@@ -24,9 +24,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 >>>>>>> ebbc246 (init)
 =======
 
+<<<<<<< HEAD
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 >>>>>>> ee8f946 (fixed errors)
+=======
+>>>>>>> 71a588b (merge clean up)
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
