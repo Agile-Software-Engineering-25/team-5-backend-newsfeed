@@ -10,7 +10,16 @@ import com.ase.newsfeedservice.components.NewsPost;
 import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
 import com.ase.newsfeedservice.repositories.NewsPostRepository;
 
+<<<<<<< HEAD
 >>>>>>> 11758a8 (Namechange for deployment)
+=======
+<<<<<<< HEAD:src/main/java/com/ase/newsfeedservice/services/NewsPostService.java
+=======
+import com.ase.userservice.components.NewsPost;
+import com.ase.userservice.components.NewsPostHistoryItemDto;
+import com.ase.userservice.repositories.NewsPostRepository;
+>>>>>>> 1d4818d (cleaned up merge conflict):src/main/java/com/ase/userservice/services/NewsPostService.java
+>>>>>>> ff505d1 (cleaned up merge conflict)
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
