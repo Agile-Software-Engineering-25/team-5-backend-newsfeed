@@ -5,12 +5,17 @@ import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
 import com.ase.newsfeedservice.services.NewsPostService;
 import lombok.RequiredArgsConstructor;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 <<<<<<< HEAD
 
 =======
+=======
+
+import org.springframework.data.domain.Page;
+>>>>>>> c7a96a8 (cleaned up merge conflict)
 import org.springframework.format.annotation.DateTimeFormat;
 >>>>>>> 5aeb80b (init)
 =======
