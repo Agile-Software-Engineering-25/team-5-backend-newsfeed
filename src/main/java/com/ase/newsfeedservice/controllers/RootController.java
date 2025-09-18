@@ -4,34 +4,8 @@ import com.ase.newsfeedservice.components.NewsPost;
 import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
 import com.ase.newsfeedservice.services.NewsPostService;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.data.domain.Page;
-=======
->>>>>>> 6fc83c0 (init)
 import org.springframework.format.annotation.DateTimeFormat;
-=======
-
-import org.springframework.data.domain.Page;
->>>>>>> ff505d1 (cleaned up merge conflict)
-import org.springframework.format.annotation.DateTimeFormat;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-=======
-=======
-=======
-
-import org.springframework.data.domain.Page;
->>>>>>> c7a96a8 (cleaned up merge conflict)
-import org.springframework.format.annotation.DateTimeFormat;
->>>>>>> 5aeb80b (init)
-=======
-import org.springframework.format.annotation.DateTimeFormat;
->>>>>>> ebbc246 (init)
->>>>>>> c62854e (init)
-=======
->>>>>>> 7da6cdc (fix merge conflict issues; fix date format)
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,20 +14,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 7da6cdc (fix merge conflict issues; fix date format)
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-<<<<<<< HEAD
-=======
-import java.time.OffsetDateTime;
->>>>>>> 6fc83c0 (init)
-=======
->>>>>>> 7da6cdc (fix merge conflict issues; fix date format)
+
 import java.util.List;
 
 @RestController
@@ -102,54 +67,6 @@ public class RootController {
     Page<NewsPost> newsPage = service.listNewsPosts(query, offsetDateTimeFrom, offsetDateTimeTo, zeroBasedPage,
         pageSize);
     return newsPage.getContent();
-<<<<<<< HEAD
-=======
-  public Page<NewsPost> list(
-=======
-  public List<NewsPost> list(
->>>>>>> 7e4539e (fix data format)
-      // Optional text search on title and summary
-      @RequestParam(required = false) String query,
-
-      // Optional start of the date range
-      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime from,
-
-      // Optional end of the date range
-      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime to,
-
-      // Page number, REQUIRED
-      @RequestParam int page,
-
-<<<<<<< HEAD
-    // Number of items per page, REQUIRED
-    @RequestParam int pageSize
-  ) {
-<<<<<<< HEAD
-    return newsPostService.listNewsPosts(query, from, to, page, pageSize);
->>>>>>> 4761264 (added queries)
-=======
-=======
-      // Number of items per page, REQUIRED
-      @RequestParam int pageSize) {
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 3d8d8d6 (make the linter shut up)
-    return service.listNewsPosts(query, from, to, page, pageSize);
->>>>>>> d1a2d60 (fixed errors)
-=======
-        // First, get the full Page object from your service
-    Page<NewsPost> newsPage = service.listNewsPosts(query, from, to, page, pageSize);
-    
-    // Then, return only the content list
-=======
-
-    int zeroBasedPage = page > 0 ? page - 1 : 0;
-    Page<NewsPost> newsPage = service.listNewsPosts(query, from, to, zeroBasedPage, pageSize);
->>>>>>> aaef08f (make page 1 indexed)
-    return newsPage.getContent();
->>>>>>> 7e4539e (fix data format)
-=======
->>>>>>> 7da6cdc (fix merge conflict issues; fix date format)
   }
 
   @PutMapping("/newsfeed/{id}")

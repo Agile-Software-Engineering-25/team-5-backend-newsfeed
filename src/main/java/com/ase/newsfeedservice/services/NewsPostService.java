@@ -1,56 +1,9 @@
 package com.ase.newsfeedservice.services;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-import com.ase.newsfeedservice.components.NewsPost;
-import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
-import com.ase.newsfeedservice.repositories.NewsPostRepository;
-=======
-=======
->>>>>>> 2fa924d (Namechange for deployment)
 
 import com.ase.newsfeedservice.components.NewsPost;
 import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
 import com.ase.newsfeedservice.repositories.NewsPostRepository;
 
-<<<<<<< HEAD
->>>>>>> 11758a8 (Namechange for deployment)
-=======
-<<<<<<< HEAD:src/main/java/com/ase/newsfeedservice/services/NewsPostService.java
-=======
-import com.ase.userservice.components.NewsPost;
-import com.ase.userservice.components.NewsPostHistoryItemDto;
-import com.ase.userservice.repositories.NewsPostRepository;
->>>>>>> 1d4818d (cleaned up merge conflict):src/main/java/com/ase/userservice/services/NewsPostService.java
-<<<<<<< HEAD
->>>>>>> ff505d1 (cleaned up merge conflict)
-=======
-=======
-
-import com.ase.newsfeedservice.components.NewsPost;
-import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
-import com.ase.newsfeedservice.repositories.NewsPostRepository;
-
->>>>>>> dc3a951 (Namechange for deployment)
-<<<<<<< HEAD
->>>>>>> 2fa924d (Namechange for deployment)
-=======
-=======
-import com.ase.userservice.components.NewsPost;
-import com.ase.userservice.components.NewsPostHistoryItemDto;
-import com.ase.userservice.repositories.NewsPostRepository;
->>>>>>> aa033ab (init)
-<<<<<<< HEAD
->>>>>>> c62854e (init)
-=======
-=======
-import com.ase.newsfeedservice.components.NewsPost;
-import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
-import com.ase.newsfeedservice.repositories.NewsPostRepository;
->>>>>>> 8f80d4f (fix merge conflict issues; fix date format)
->>>>>>> 7da6cdc (fix merge conflict issues; fix date format)
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -69,15 +22,7 @@ public class NewsPostService {
 
   public Page<NewsPost> listNewsPosts(String query, OffsetDateTime from, OffsetDateTime to, int page, int pageSize) {
     Pageable pageable = PageRequest.of(page, pageSize);
-<<<<<<< HEAD
-<<<<<<< HEAD
     return repository.listNewsPosts(query, from, to, pageable);
-=======
-    return newsPostRepository.findWithFilters(query, from, to, pageable);
->>>>>>> 4761264 (added queries)
-=======
-    return repository.listNewsPosts(query, from, to, pageable);
->>>>>>> d1a2d60 (fixed errors)
   }
 
   public NewsPost saveNewsPost(NewsPost newsPost) {
