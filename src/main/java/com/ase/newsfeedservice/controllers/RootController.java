@@ -4,8 +4,11 @@ import com.ase.newsfeedservice.components.NewsPost;
 import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
 import com.ase.newsfeedservice.services.NewsPostService;
 import lombok.RequiredArgsConstructor;
+<<<<<<< HEAD
 
 import org.springframework.data.domain.Page;
+=======
+>>>>>>> 6fc83c0 (init)
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,10 +18,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+<<<<<<< HEAD
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+=======
+import java.time.OffsetDateTime;
+>>>>>>> 6fc83c0 (init)
 import java.util.List;
 
 @RestController
@@ -72,7 +79,7 @@ public class RootController {
   public Page<NewsPost> list(
     // Optional text search on title and summary
     @RequestParam(required = false) String query,
-    
+
     // Optional start of the date range
     @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime from,
 
