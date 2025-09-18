@@ -3,6 +3,7 @@ package com.ase.newsfeedservice.services;
 <<<<<<< HEAD
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.ase.newsfeedservice.components.NewsPost;
 import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
 import com.ase.newsfeedservice.repositories.NewsPostRepository;
@@ -41,7 +42,15 @@ import com.ase.userservice.components.NewsPost;
 import com.ase.userservice.components.NewsPostHistoryItemDto;
 import com.ase.userservice.repositories.NewsPostRepository;
 >>>>>>> aa033ab (init)
+<<<<<<< HEAD
 >>>>>>> c62854e (init)
+=======
+=======
+import com.ase.newsfeedservice.components.NewsPost;
+import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
+import com.ase.newsfeedservice.repositories.NewsPostRepository;
+>>>>>>> 8f80d4f (fix merge conflict issues; fix date format)
+>>>>>>> 7da6cdc (fix merge conflict issues; fix date format)
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
