@@ -1,4 +1,4 @@
-package com.ase.userservice.components;
+package com.ase.newsfeedservice.components;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -87,4 +87,3 @@ public class Embedded {
   }
 
 }
-

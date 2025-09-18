@@ -1,5 +1,6 @@
-package com.ase.userservice.repositories;
+package com.ase.newsfeedservice.repositories;
 
+<<<<<<< HEAD:src/main/java/com/ase/userservice/repositories/NewsPostRepository.java
 import com.ase.userservice.components.NewsPost;
 
 import java.time.OffsetDateTime;
@@ -7,6 +8,9 @@ import java.time.OffsetDateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+=======
+import com.ase.newsfeedservice.components.NewsPost;
+>>>>>>> 11758a8 (Namechange for deployment):src/main/java/com/ase/newsfeedservice/repositories/NewsPostRepository.java
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,13 +1,13 @@
-package com.ase.userservice.components;
+package com.ase.newsfeedservice.components;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Embedded;
 import lombok.Data;
 
+import static com.ase.newsfeedservice.components.Embedded.*;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
-
-import static com.ase.userservice.components.Embedded.*;
 
 @Entity
 @Data
