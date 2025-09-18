@@ -29,7 +29,11 @@ public class NewsPostService {
 
   public Page<NewsPost> listNewsPosts(String query, OffsetDateTime from, OffsetDateTime to, int page, int pageSize) {
     Pageable pageable = PageRequest.of(page, pageSize);
+<<<<<<< HEAD
     return repository.listNewsPosts(query, from, to, pageable);
+=======
+    return newsPostRepository.findWithFilters(query, from, to, pageable);
+>>>>>>> 4761264 (added queries)
   }
 
   public NewsPost saveNewsPost(NewsPost newsPost) {

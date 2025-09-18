@@ -39,6 +39,7 @@ public class RootController {
   }
 
   @GetMapping("/newsfeed")
+<<<<<<< HEAD
   public List<NewsPost> list(
       // Optional text search on title and summary
       @RequestParam(required = false) String query,
@@ -67,6 +68,25 @@ public class RootController {
     Page<NewsPost> newsPage = service.listNewsPosts(query, offsetDateTimeFrom, offsetDateTimeTo, zeroBasedPage,
         pageSize);
     return newsPage.getContent();
+=======
+  public Page<NewsPost> list(
+    // Optional text search on title and summary
+    @RequestParam(required = false) String query,
+    
+    // Optional start of the date range
+    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime from,
+
+    // Optional end of the date range
+    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime to,
+
+    // Page number, REQUIRED
+    @RequestParam int page,
+
+    // Number of items per page, REQUIRED
+    @RequestParam int pageSize
+  ) {
+    return newsPostService.listNewsPosts(query, from, to, page, pageSize);
+>>>>>>> 4761264 (added queries)
   }
 
   @PutMapping("/newsfeed/{id}")
