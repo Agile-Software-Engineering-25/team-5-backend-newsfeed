@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backend-newsfeed
+  labels:
+    app: backend-newsfeed
+  annotations:
+    traefik.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: sau-portal.de
+      http:
+        paths:
+          - path: /backend-newsfeed
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-newsfeed
+                port:
+                  number: 8080

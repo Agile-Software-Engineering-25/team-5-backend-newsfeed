@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+metadata:
+  name: backend-newsfeed
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+
+commonLabels:
+  environment: ase-5
+  managed-by: kustomize
+  app: backend-newsfeed
+
+namePrefix: "ase-"
+
+namespace: ase-5
+
+replicas:
+  - name: backend-newsfeed
+    count: 2
