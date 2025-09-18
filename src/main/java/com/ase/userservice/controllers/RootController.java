@@ -52,10 +52,9 @@ public class RootController {
 
       // Number of items per page, REQUIRED
       @RequestParam int pageSize) {
-        // First, get the full Page object from your service
-    Page<NewsPost> newsPage = service.listNewsPosts(query, from, to, page, pageSize);
-    
-    // Then, return only the content list
+
+    int zeroBasedPage = page > 0 ? page - 1 : 0;
+    Page<NewsPost> newsPage = service.listNewsPosts(query, from, to, zeroBasedPage, pageSize);
     return newsPage.getContent();
   }
 
