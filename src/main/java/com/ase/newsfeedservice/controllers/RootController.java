@@ -4,10 +4,14 @@ import com.ase.newsfeedservice.components.NewsPost;
 import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
 import com.ase.newsfeedservice.services.NewsPostService;
 import lombok.RequiredArgsConstructor;
+<<<<<<< HEAD
 
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 
+=======
+import org.springframework.format.annotation.DateTimeFormat;
+>>>>>>> 5aeb80b (init)
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +42,7 @@ public class RootController {
 
   @GetMapping("/newsfeed")
   public List<NewsPost> list(
+<<<<<<< HEAD
       // Optional text search on title and summary
       @RequestParam(required = false) String query,
 
@@ -56,6 +61,24 @@ public class RootController {
     int zeroBasedPage = page > 0 ? page - 1 : 0;
     Page<NewsPost> newsPage = service.listNewsPosts(query, from, to, zeroBasedPage, pageSize);
     return newsPage.getContent();
+=======
+    // Optional text search on title and summary
+    @RequestParam(required = false) String query,
+
+    // Optional start of the date range
+    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime from,
+
+    // Optional end of the date range
+    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime to,
+
+    // Page number, REQUIRED
+    @RequestParam int page,
+
+    // Number of items per page, REQUIRED
+    @RequestParam int pageSize
+  ) {
+    return newsPostService.listNewsPosts(query, from, to, page, pageSize);
+>>>>>>> 5aeb80b (init)
   }
 
   @PutMapping("/newsfeed/{id}")
