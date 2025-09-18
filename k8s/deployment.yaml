@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-newsfeed
+  name: newsfeed-service
   labels:
-    app: backend-newsfeed
+    app: newsfeed-service
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: backend-newsfeed
+      app: newsfeed-service
   template:
     metadata:
       labels:
-        app: backend-newsfeed
+        app: newsfeed-service
     spec:
       containers:
-        - name: backend-newsfeed
+        - name: newsfeed-service
           image: ghcr.io/agile-software-engineering-25/team-5-backend-newsfeed:latest
           ports:
             - containerPort: 8080
@@ -28,13 +28,13 @@ spec:
               cpu: "300m"
           readinessProbe:
             httpGet:
-              path: /actuator/health
+              path: /newsfeed
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 5
           livenessProbe:
             httpGet:
-              path: /actuator/health
+              path: /newsfeed
               port: 8080
             initialDelaySeconds: 20
             periodSeconds: 20

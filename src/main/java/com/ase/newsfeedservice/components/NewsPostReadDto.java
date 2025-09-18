@@ -1,8 +1,8 @@
-package com.ase.userservice.components;
+package com.ase.newsfeedservice.components;
 
 import lombok.Data;
 
-import com.ase.userservice.components.Embedded.*;
+import com.ase.newsfeedservice.components.Embedded.*;
 
 @Data
 public class NewsPostReadDto {

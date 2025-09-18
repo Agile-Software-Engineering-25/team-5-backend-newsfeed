@@ -1,4 +1,4 @@
-package com.ase.userservice.components;
+package com.ase.newsfeedservice.components;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

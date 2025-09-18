@@ -1,8 +1,8 @@
-package com.ase.userservice.controllers;
+package com.ase.newsfeedservice.controllers;
 
-import com.ase.userservice.components.NewsPost;
-import com.ase.userservice.components.NewsPostHistoryItemDto;
-import com.ase.userservice.services.NewsPostService;
+import com.ase.newsfeedservice.components.NewsPost;
+import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
+import com.ase.newsfeedservice.services.NewsPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

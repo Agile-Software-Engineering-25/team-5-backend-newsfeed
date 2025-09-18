@@ -1,4 +1,4 @@
-package com.ase.userservice.components;
+package com.ase.newsfeedservice.components;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -16,19 +16,26 @@ import java.util.UUID;
 @Entity
 @Data
 public class NewsPost_old {
-  @Id @Column(nullable = false, updatable = false) private String id;
+  @Id
+  @Column(nullable = false, updatable = false)
+  private String id;
   private String title;
   private String slug;
   private String summary;
   private String status;
-  @Embedded private Content content;
-  @Embedded private FeaturedImage featuredImage;
-  @Embedded private Author author;
+  @Embedded
+  private Content content;
+  @Embedded
+  private FeaturedImage featuredImage;
+  @Embedded
+  private Author author;
   private String creationDate;
   private String publishDate;
   private String lastModified;
-  @ElementCollection List<NewsRevision> revisionHistory;
-  @Embedded private Expiration expiration;
+  @ElementCollection
+  List<NewsRevision> revisionHistory;
+  @Embedded
+  private Expiration expiration;
   @Embedded
   @AttributeOverrides({
       @AttributeOverride(name = "read.permissionType", column = @Column(name = "read_permission_type")),
@@ -44,10 +51,14 @@ public class NewsPost_old {
       @AttributeOverride(name = "moderate.users", column = @Column(name = "moderate_users"))
   })
   private NewsPermissions permissions;
-  @Embedded private NewsTaxonomy taxonomy;
-  @Embedded private NewsSEO seo;
-  @Embedded private NewsAnalytics analytics;
-  @Embedded private NewsSettings settings;
+  @Embedded
+  private NewsTaxonomy taxonomy;
+  @Embedded
+  private NewsSEO seo;
+  @Embedded
+  private NewsAnalytics analytics;
+  @Embedded
+  private NewsSettings settings;
 
   // UUID gen
   @PrePersist

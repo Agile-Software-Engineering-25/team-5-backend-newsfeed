@@ -1,10 +1,11 @@
-package com.ase.userservice.components;
+package com.ase.newsfeedservice.components;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import com.ase.userservice.components.Embedded.*;
 import java.time.LocalDateTime;
+
+import com.ase.newsfeedservice.components.Embedded.*;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
