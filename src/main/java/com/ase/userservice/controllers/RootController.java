@@ -37,7 +37,7 @@ public class RootController {
   }
 
   @GetMapping("/newsfeed")
-  public Page<NewsPost> list(
+  public List<NewsPost> list(
       // Optional text search on title and summary
       @RequestParam(required = false) String query,
 
@@ -52,7 +52,11 @@ public class RootController {
 
       // Number of items per page, REQUIRED
       @RequestParam int pageSize) {
-    return service.listNewsPosts(query, from, to, page, pageSize);
+        // First, get the full Page object from your service
+    Page<NewsPost> newsPage = service.listNewsPosts(query, from, to, page, pageSize);
+    
+    // Then, return only the content list
+    return newsPage.getContent();
   }
 
   @PutMapping("/newsfeed/{id}")
