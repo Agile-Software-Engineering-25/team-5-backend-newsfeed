@@ -87,7 +87,6 @@
         </module>
 
         <!-- Spaces around operators / wrapping -->
-        <module name="OperatorWrap"/>
 
         <!-- Spaces inside parentheses: disabled for this Checkstyle version -->
 
