@@ -1,12 +1,13 @@
 package com.ase.userservice.services;
 
 import com.ase.userservice.components.NewsPost;
-import com.ase.userservice.components.NewsPostHistoryItemDto;
 import com.ase.userservice.repositories.NewsPostRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -15,8 +16,9 @@ public class NewsPostService {
 
   private final NewsPostRepository repository;
 
-  public List<NewsPost> getAllNewsPosts(String filter) {
-    return repository.findAll();
+  public Page<NewsPost> listNewsPosts(String query, OffsetDateTime from, OffsetDateTime to, int page, int pageSize) {
+    Pageable pageable = PageRequest.of(page, pageSize);
+    return newsPostRepository.findWithFilters(query, from, to, pageable);
   }
 
   public NewsPost saveNewsPost(NewsPost newsPost) {

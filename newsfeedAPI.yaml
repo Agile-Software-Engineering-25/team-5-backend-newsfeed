@@ -27,22 +27,47 @@ paths:
     get:
       tags: [Newsfeed]
       summary: Read Newspost (Liste)
-      description: Liest Newsposts, optional gefiltert.
+      description: Liest eine paginierte Liste von Newsposts, optional gefiltert nach Suchbegriff und/oder Datum.
       parameters:
         - in: query
-          name: filter
-          description: Kompakte Filter-Syntax (RSQL-ähnlich); wird ignoriert, wenn einzelne Query-Parameter genutzt werden.
-          schema: { type: string }
-          examples:
-            publishedByU42:
-              summary: Published und Autor u42
-              value: status==published;author.user_id==u42
-            rangeAndLike:
-              summary: Titel enthält "solar" ab 2025-06-01, neueste zuerst
-              value: title=like=*solar*;publish_date=ge=2025-06-01T00:00:00Z
-            notDeletedStickyOrTwoAuthors:
-              summary: Nicht gelöscht, sticky und (Autor u1 oder u2)
-              value: status!=deleted;settings.sticky==true;(author.user_id==u1,author.user_id==u2)
+          name: query
+          description: Optionaler Suchbegriff, der in Titel und Zusammenfassung gesucht wird.
+          required: false
+          schema:
+            type: string
+          example: "Test"
+        - in: query
+          name: from
+          description: Optionales Startdatum (ISO 8601 Format), um nur Posts ab diesem Zeitpunkt zu erhalten.
+          required: false
+          schema:
+            type: string
+            format: date-time
+          example: "2025-09-11T00:00:00Z"
+        - in: query
+          name: to
+          description: Optionales Enddatum (ISO 8601 Format), um nur Posts bis zu diesem Zeitpunkt zu erhalten.
+          required: false
+          schema:
+            type: string
+            format: date-time
+          example: "2025-09-18T23:59:59Z"
+        - in: query
+          name: page
+          description: Die abzurufende Seitenzahl (beginnend bei 0).
+          required: true
+          schema:
+            type: integer
+            minimum: 0
+          example: 1
+        - in: query
+          name: pageSize
+          description: Die Anzahl der Einträge pro Seite.
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          example: 10
 
       responses:   # 👈 hier eine Stufe eingerückt wie "parameters"
         '200':
