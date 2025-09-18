@@ -13,8 +13,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface NewsPostRepository extends JpaRepository<NewsPost, String> {
   @Query("SELECT np FROM NewsPost np WHERE " +
-      "(:query IS NULL OR LOWER(np.title) LIKE LOWER(CONCAT('%', :query, '%')) OR LOWER(np.summary) LIKE LOWER(CONCAT('%', :query, '%'))) AND "
-      +
+      "(:query IS NULL OR LOWER(np.title) LIKE LOWER(CONCAT('%', :query, '%'))" +
+      "OR LOWER(np.summary) LIKE LOWER(CONCAT('%', :query, '%'))) AND " +
       "(:from IS NULL OR np.publishDate >= :from) AND " +
       "(:to IS NULL OR np.publishDate <= :to)")
   Page<NewsPost> listNewsPosts(
