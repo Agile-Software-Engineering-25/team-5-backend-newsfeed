@@ -13,6 +13,7 @@ public class DevCorsConfiguration implements WebMvcConfigurer {
         // Add common local origins below.
         // You can add more ports or addresses as needed for your setup.
 <<<<<<< HEAD
+<<<<<<< HEAD
         .allowedOriginPatterns("http://localhost:*", "http://127.0.0.1:*")
 =======
         .allowedOrigins(
@@ -25,6 +26,9 @@ public class DevCorsConfiguration implements WebMvcConfigurer {
             "http://127.0.0.1:8080",
             "http://127.0.0.1:8081")
 >>>>>>> 0f2e87e (make the linter shut up)
+=======
+        .allowedOriginPatterns("http://localhost:*", "http://127.0.0.1:*")
+>>>>>>> acbb7d5 (make page 1 indexed)
         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
         .allowedHeaders("*")
         .allowCredentials(true)
