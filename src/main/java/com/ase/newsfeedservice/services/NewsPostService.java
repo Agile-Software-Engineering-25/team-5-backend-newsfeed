@@ -2,6 +2,7 @@ package com.ase.newsfeedservice.services;
 <<<<<<< HEAD
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 import com.ase.newsfeedservice.components.NewsPost;
 import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
 import com.ase.newsfeedservice.repositories.NewsPostRepository;
@@ -32,7 +33,16 @@ import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
 import com.ase.newsfeedservice.repositories.NewsPostRepository;
 
 >>>>>>> dc3a951 (Namechange for deployment)
+<<<<<<< HEAD
 >>>>>>> 2fa924d (Namechange for deployment)
+=======
+=======
+import com.ase.userservice.components.NewsPost;
+import com.ase.userservice.components.NewsPostHistoryItemDto;
+import com.ase.userservice.components.NewsPostHistoryItemDto;
+import com.ase.userservice.repositories.NewsPostRepository;
+>>>>>>> aa033ab (init)
+>>>>>>> c62854e (init)
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
