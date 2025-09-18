@@ -60,8 +60,12 @@ public class RootController {
 
   @GetMapping("/newsfeed")
 <<<<<<< HEAD
+<<<<<<< HEAD
   public List<NewsPost> list(
 <<<<<<< HEAD
+=======
+  public List<NewsPost> list(
+>>>>>>> a5c5bcd (fix data format)
       // Optional text search on title and summary
       @RequestParam(required = false) String query,
 
@@ -76,6 +80,7 @@ public class RootController {
 
       // Number of items per page, REQUIRED
       @RequestParam int pageSize) {
+<<<<<<< HEAD
 
     int zeroBasedPage = page > 0 ? page - 1 : 0;
     Page<NewsPost> newsPage = service.listNewsPosts(query, from, to, zeroBasedPage, pageSize);
@@ -112,6 +117,13 @@ public class RootController {
 >>>>>>> 0f2e87e (make the linter shut up)
     return service.listNewsPosts(query, from, to, page, pageSize);
 >>>>>>> 00005be (fixed errors)
+=======
+        // First, get the full Page object from your service
+    Page<NewsPost> newsPage = service.listNewsPosts(query, from, to, page, pageSize);
+    
+    // Then, return only the content list
+    return newsPage.getContent();
+>>>>>>> a5c5bcd (fix data format)
   }
 
   @PutMapping("/newsfeed/{id}")
