@@ -50,7 +50,7 @@ public class RootController {
     // Number of items per page, REQUIRED
     @RequestParam int pageSize
   ) {
-    return newsPostService.listNewsPosts(query, from, to, page, pageSize);
+    return service.listNewsPosts(query, from, to, page, pageSize);
   }
 
   @PutMapping("/newsfeed/{id}")

@@ -21,7 +21,7 @@ public class NewsPostService {
 
   public Page<NewsPost> listNewsPosts(String query, OffsetDateTime from, OffsetDateTime to, int page, int pageSize) {
     Pageable pageable = PageRequest.of(page, pageSize);
-    return newsPostRepository.findWithFilters(query, from, to, pageable);
+    return repository.listNewsPosts(query, from, to, pageable);
   }
 
   public NewsPost saveNewsPost(NewsPost newsPost) {
