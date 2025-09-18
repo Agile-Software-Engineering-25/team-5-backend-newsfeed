@@ -12,7 +12,19 @@ public class DevCorsConfiguration implements WebMvcConfigurer {
     registry.addMapping("/**") // Apply to all endpoints
         // Add common local origins below.
         // You can add more ports or addresses as needed for your setup.
+<<<<<<< HEAD
         .allowedOriginPatterns("http://localhost:*", "http://127.0.0.1:*")
+=======
+        .allowedOrigins(
+            "http://localhost:3000", // React default
+            "http://localhost:4200", // Angular default
+            "http://localhost:8080", // Vue default / Embedded Tomcat
+            "http://localhost:8081",
+            "http://127.0.0.1:3000",
+            "http://127.0.0.1:4200",
+            "http://127.0.0.1:8080",
+            "http://127.0.0.1:8081")
+>>>>>>> 0f2e87e (make the linter shut up)
         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
         .allowedHeaders("*")
         .allowCredentials(true)

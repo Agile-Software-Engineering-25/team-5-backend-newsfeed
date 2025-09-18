@@ -59,6 +59,7 @@ public class RootController {
   }
 
   @GetMapping("/newsfeed")
+<<<<<<< HEAD
   public List<NewsPost> list(
 <<<<<<< HEAD
       // Optional text search on title and summary
@@ -82,16 +83,22 @@ public class RootController {
 =======
     // Optional text search on title and summary
     @RequestParam(required = false) String query,
+=======
+  public Page<NewsPost> list(
+      // Optional text search on title and summary
+      @RequestParam(required = false) String query,
+>>>>>>> 0f2e87e (make the linter shut up)
 
-    // Optional start of the date range
-    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime from,
+      // Optional start of the date range
+      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime from,
 
-    // Optional end of the date range
-    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime to,
+      // Optional end of the date range
+      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime to,
 
-    // Page number, REQUIRED
-    @RequestParam int page,
+      // Page number, REQUIRED
+      @RequestParam int page,
 
+<<<<<<< HEAD
     // Number of items per page, REQUIRED
     @RequestParam int pageSize
   ) {
@@ -99,6 +106,10 @@ public class RootController {
     return newsPostService.listNewsPosts(query, from, to, page, pageSize);
 >>>>>>> 5aeb80b (init)
 =======
+=======
+      // Number of items per page, REQUIRED
+      @RequestParam int pageSize) {
+>>>>>>> 0f2e87e (make the linter shut up)
     return service.listNewsPosts(query, from, to, page, pageSize);
 >>>>>>> 00005be (fixed errors)
   }
