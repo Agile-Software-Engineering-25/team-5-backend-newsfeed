@@ -2,7 +2,6 @@ package com.ase.userservice.services;
 
 import com.ase.userservice.components.NewsPost;
 import com.ase.userservice.components.NewsPostHistoryItemDto;
-import com.ase.userservice.components.NewsPostHistoryItemDto;
 import com.ase.userservice.repositories.NewsPostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
