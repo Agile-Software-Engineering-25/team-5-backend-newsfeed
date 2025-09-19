@@ -3,7 +3,7 @@ package com.ase.newsfeedservice.components;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import com.ase.newsfeedservice.components.Embedded.*;
 
@@ -33,9 +33,9 @@ public class NewsPostCreateDto {
     entity.setContent(content);
     entity.setFeaturedImage(featuredImage);
     entity.setAuthor(author);
-    entity.setCreationDate(creationDate != null ? LocalDateTime.parse(creationDate) : null);
-    entity.setPublishDate(publishDate != null ? LocalDateTime.parse(publishDate) : null);
-    entity.setLastModified(lastModified != null ? LocalDateTime.parse(lastModified) : null);
+    entity.setCreationDate(creationDate != null ? OffsetDateTime.parse(creationDate) : null);
+    entity.setPublishDate(publishDate != null ? OffsetDateTime.parse(publishDate) : null);
+    entity.setLastModified(lastModified != null ? OffsetDateTime.parse(lastModified) : null);
     entity.setExpiration(expiration);
     entity.setPermissions(permissions);
     entity.setSettings(settings);

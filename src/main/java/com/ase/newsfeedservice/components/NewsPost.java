@@ -6,7 +6,7 @@ import lombok.Data;
 
 import static com.ase.newsfeedservice.components.Embedded.*;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity
@@ -32,9 +32,9 @@ public class NewsPost {
   @Embedded
   private Author author;
 
-  private LocalDateTime creationDate;
-  private LocalDateTime publishDate;
-  private LocalDateTime lastModified;
+  private OffsetDateTime creationDate;
+  private OffsetDateTime publishDate;
+  private OffsetDateTime lastModified;
 
   @Version
   private Integer version;
@@ -59,16 +59,16 @@ public class NewsPost {
       this.id = UUID.randomUUID().toString();
     }
     if (this.creationDate == null) {
-      this.creationDate = LocalDateTime.now();
+      this.creationDate = OffsetDateTime.now();
     }
     if (this.lastModified == null) {
-      this.lastModified = LocalDateTime.now();
+      this.lastModified = OffsetDateTime.now();
     }
   }
 
   @PreUpdate
   public void updateModifiedDate() {
-    this.lastModified = LocalDateTime.now();
+    this.lastModified = OffsetDateTime.now();
   }
 
   public enum NewsPostStatus {
