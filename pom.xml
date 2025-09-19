@@ -64,6 +64,12 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -75,7 +81,7 @@
                     <archive>
                         <manifest>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            <mainClass>com.ase.newsfeed-service.Application</mainClass>
+                            <mainClass>com.ase.newsfeedservice.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

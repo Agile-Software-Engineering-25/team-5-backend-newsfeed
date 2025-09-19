@@ -1,7 +1,6 @@
 # Newsfeed Service
 
-Newsfeed Service is a Spring Boot microservice for managing and delivering a newsfeed.
-The application is containerized, can be deployed in Kubernetes clusters, and supports both H2 (local) and PostgreSQL (production) as databases.
+Newsfeed Service is a Spring Boot microservice for managing and delivering a newsfeed. The application is containerized, can be deployed in Kubernetes clusters, and supports both H2 (local) and PostgreSQL (production) as databases.
 The backend provides REST APIs for newsfeed operations and is optimized for cloud-native deployments.
 
 ## Features

@@ -15,4 +15,4 @@ spring:
 
 server:
   servlet:
-    context-path: /newsfeed-service
+    context-path: /
