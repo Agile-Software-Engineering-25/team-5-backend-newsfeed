@@ -21,8 +21,8 @@ The backend provides REST APIs for newsfeed operations and is optimized for clou
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-repo/userservice.git
-cd userservice
+git clone https://github.com/your-repo/newsfeedservice.git
+cd newsfeedservice
 ```
 ### Build the Project
 ```bash

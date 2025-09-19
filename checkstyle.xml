@@ -87,7 +87,6 @@
         </module>
 
         <!-- Spaces around operators / wrapping -->
-        <module name="OperatorWrap"/>
 
         <!-- Spaces inside parentheses: disabled for this Checkstyle version -->
 
@@ -116,7 +115,7 @@
 
         <!-- Magic Numbers -->
         <module name="MagicNumber">
-            <property name="ignoreNumbers" value="-1,0,1,2"/>
+            <property name="ignoreNumbers" value="-1,0,1,2,3600"/>
             <property name="ignoreHashCodeMethod" value="true"/>
             <property name="ignoreAnnotation" value="true"/>
         </module>
