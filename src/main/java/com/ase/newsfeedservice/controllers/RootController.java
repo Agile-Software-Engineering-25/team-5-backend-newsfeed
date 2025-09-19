@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +35,7 @@ public class RootController {
     return ResponseEntity.ok("API Root: /newsfeed");
   }
 
-  @PutMapping("/newsfeed")
+  @PostMapping("/newsfeed")
   public ResponseEntity<NewsPost> create(@RequestBody NewsPost newsPost) {
     NewsPost saved = service.saveNewsPost(newsPost);
     return ResponseEntity.ok(saved);
