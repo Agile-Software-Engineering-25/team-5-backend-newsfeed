@@ -57,14 +57,14 @@ public class RootController {
 
       // Number of items per page, REQUIRED
       @RequestParam int pageSize) {
-    
+
     OffsetDateTime offsetDateTimeFrom = null;
     OffsetDateTime offsetDateTimeTo = null;
     if (to != null && from != null) {
       LocalDate localDateFrom = LocalDate.parse(from);
       LocalDate localDateTo = LocalDate.parse(to);
 
-      offsetDateTimeFrom = localDateFrom.plusDays(1).atStartOfDay().atOffset(ZoneOffset.systemDefault()
+      offsetDateTimeFrom = localDateFrom.atStartOfDay().atOffset(ZoneOffset.systemDefault()
           .getRules().getOffset(localDateFrom.atStartOfDay()));
       offsetDateTimeTo = localDateTo.plusDays(1).atStartOfDay().atOffset(ZoneOffset.systemDefault()
           .getRules().getOffset(localDateTo.atStartOfDay()));
