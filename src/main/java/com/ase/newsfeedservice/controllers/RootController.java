@@ -57,14 +57,18 @@ public class RootController {
 
       // Number of items per page, REQUIRED
       @RequestParam int pageSize) {
+    
+    OffsetDateTime offsetDateTimeFrom = null;
+    OffsetDateTime offsetDateTimeTo = null;
+    if (to != null && from != null) {
+      LocalDate localDateFrom = LocalDate.parse(from);
+      LocalDate localDateTo = LocalDate.parse(to);
 
-    LocalDate localDateFrom = LocalDate.parse(from);
-    LocalDate localDateTo = LocalDate.parse(to);
-
-    OffsetDateTime offsetDateTimeFrom = localDateFrom.atStartOfDay().atOffset(ZoneOffset.systemDefault()
-        .getRules().getOffset(localDateFrom.atStartOfDay()));
-    OffsetDateTime offsetDateTimeTo = localDateFrom.atStartOfDay().atOffset(ZoneOffset.systemDefault()
-        .getRules().getOffset(localDateTo.atStartOfDay()));
+      offsetDateTimeFrom = localDateFrom.atStartOfDay().atOffset(ZoneOffset.systemDefault()
+          .getRules().getOffset(localDateFrom.atStartOfDay()));
+      offsetDateTimeTo = localDateFrom.atStartOfDay().atOffset(ZoneOffset.systemDefault()
+          .getRules().getOffset(localDateTo.atStartOfDay()));
+    }
 
     int zeroBasedPage = page > 0 ? page - 1 : 0;
     Page<NewsPost> newsPage = service.listNewsPosts(query, offsetDateTimeFrom, offsetDateTimeTo, zeroBasedPage,
