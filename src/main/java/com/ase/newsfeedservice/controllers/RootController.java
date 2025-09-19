@@ -64,9 +64,9 @@ public class RootController {
       LocalDate localDateFrom = LocalDate.parse(from);
       LocalDate localDateTo = LocalDate.parse(to);
 
-      offsetDateTimeFrom = localDateFrom.atStartOfDay().atOffset(ZoneOffset.systemDefault()
+      offsetDateTimeFrom = localDateFrom.plusDays(1).atStartOfDay().atOffset(ZoneOffset.systemDefault()
           .getRules().getOffset(localDateFrom.atStartOfDay()));
-      offsetDateTimeTo = localDateTo.atStartOfDay().atOffset(ZoneOffset.systemDefault()
+      offsetDateTimeTo = localDateTo.plusDays(1).atStartOfDay().atOffset(ZoneOffset.systemDefault()
           .getRules().getOffset(localDateTo.atStartOfDay()));
     }
 
