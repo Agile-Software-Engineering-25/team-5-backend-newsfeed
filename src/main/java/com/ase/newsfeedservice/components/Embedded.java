@@ -10,9 +10,12 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.envers.Audited;
+
 public class Embedded {
   @Embeddable
   @Data
+  @Audited
   public static class Content {
     @Enumerated(EnumType.STRING)
     private ContentFormat format;
@@ -27,6 +30,7 @@ public class Embedded {
 
   @Embeddable
   @Data
+  @Audited
   public static class FeaturedImage {
     private String url;
     private String altText;
@@ -35,6 +39,7 @@ public class Embedded {
 
   @Embeddable
   @Data
+  @Audited
   public static class Author {
     private String userId;
     private String name;
@@ -43,6 +48,7 @@ public class Embedded {
 
   @Embeddable
   @Data
+  @Audited
   public static class Expiration {
     private LocalDateTime expiresAt;
     private Boolean autoArchive;
@@ -50,6 +56,7 @@ public class Embedded {
 
   @Embeddable
   @Data
+  @Audited
   public static class Permissions {
     @ElementCollection
     @CollectionTable(name = "news_post_read_permissions")
@@ -66,6 +73,7 @@ public class Embedded {
 
   @Embeddable
   @Data
+  @Audited
   public static class PrincipalRef {
     private String id;
 
@@ -81,6 +89,7 @@ public class Embedded {
 
   @Embeddable
   @Data
+  @Audited
   public static class Settings {
     private Boolean featured;
     private Boolean sticky;

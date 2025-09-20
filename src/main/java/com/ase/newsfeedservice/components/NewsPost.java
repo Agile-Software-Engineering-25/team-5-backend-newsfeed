@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import jakarta.persistence.Embedded;
 import lombok.Data;
 
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+
 import static com.ase.newsfeedservice.components.Embedded.*;
 
 import java.time.OffsetDateTime;
@@ -12,6 +15,8 @@ import java.util.UUID;
 @Entity
 @Data
 @Table(name = "news_posts")
+@Audited
+@AuditTable("news_post_aud")
 public class NewsPost {
   @Id
   @Column(nullable = false, updatable = false)
