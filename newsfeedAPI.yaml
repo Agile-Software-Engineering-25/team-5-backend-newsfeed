@@ -38,20 +38,20 @@ paths:
           example: "Test"
         - in: query
           name: from
-          description: Optionales Startdatum (ISO 8601 Format), um nur Posts ab diesem Zeitpunkt zu erhalten.
+          description: Optionales Startdatum, um nur Posts ab diesem Zeitpunkt zu erhalten.
           required: false
           schema:
             type: string
             format: date-time
-          example: "2025-09-11T00:00:00Z"
+          example: "2025-09-13"
         - in: query
           name: to
-          description: Optionales Enddatum (ISO 8601 Format), um nur Posts bis zu diesem Zeitpunkt zu erhalten.
+          description: Optionales Enddatum, um nur Posts bis zu diesem Zeitpunkt zu erhalten.
           required: false
           schema:
             type: string
             format: date-time
-          example: "2025-09-18T23:59:59Z"
+          example: "2025-09-18"
         - in: query
           name: page
           description: Die abzurufende Seitenzahl (beginnend bei 0).
