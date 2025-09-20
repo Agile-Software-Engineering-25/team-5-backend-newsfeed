@@ -1,7 +1,7 @@
 package com.ase.newsfeedservice.controllers;
 
 import com.ase.newsfeedservice.components.NewsPost;
-import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
+import com.ase.newsfeedservice.components.NewsPostRevisionDto;
 import com.ase.newsfeedservice.services.NewsPostService;
 import lombok.RequiredArgsConstructor;
 
@@ -90,7 +90,7 @@ public class RootController {
   }
 
   @GetMapping("/newsfeed/{id}/history")
-  public ResponseEntity<List<NewsPostHistoryItemDto>> history(@PathVariable String id) {
+  public ResponseEntity<List<NewsPostRevisionDto>> history(@PathVariable String id) {
     return ResponseEntity.ok(service.getNewsPostHistory(id));
   }
 }
