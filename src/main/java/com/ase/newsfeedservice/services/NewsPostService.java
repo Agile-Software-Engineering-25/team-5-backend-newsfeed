@@ -56,17 +56,12 @@ public class NewsPostService {
     NewsPostRepo.deleteById(id);
   }
 
-  // public List<NewsPostRevisionDto> getNewsPostHistory(String id) {
-  // return List.of();
-  // }
-
   @Transactional
   public List<NewsPostRevisionDto> getNewsPostHistory(String id) {
     // 1. Get the Envers AuditReader
     AuditReader auditReader = AuditReaderFactory.get(entityManager);
 
-    // 2. Create an audit query to find all revisions for the Article entity,
-    // ordered by revision number.
+    // 2. Create an audit query to find all revisions for the Article entity, ordered by revision number.
     AuditQuery auditQuery = auditReader.createQuery()
         .forRevisionsOfEntity(NewsPost.class, false, true)
         .add(AuditEntity.id().eq(id))
@@ -87,13 +82,6 @@ public class NewsPostService {
         .collect(Collectors.toList());
   }
 
-  /**
-   * Helper method to map the raw Envers result object array to our DTO.
-   * 
-   * @param revision A raw revision object array from the Envers query.
-   *                 The array contains: [entity, revisionEntity, revisionType]
-   * @return A populated ArticleRevisionDTO.
-   */
   private NewsPostRevisionDto mapToRevisionDTO(Object[] revision) {
     NewsPost articleAtRevision = (NewsPost) revision[0];
     DefaultRevisionEntity revisionInfo = (DefaultRevisionEntity) revision[1];

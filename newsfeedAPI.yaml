@@ -2,19 +2,19 @@ openapi: 3.0.3
 info:
   title: Newsfeed API
   version: 1.0.0
-  description: API für News-Posts (Erstellen, Lesen, Aktualisieren, Löschen) und Versions-Historie.
+  description: API for News Posts (Create, Read, Update, Delete) and Version History.
 servers:
   - url: /
 tags:
   - name: Newsfeed
-    description: Newspost-Operationen
+    description: Newspost Operations
 
 paths:
   /newsfeed:
     post:
       tags: [Newsfeed]
       summary: Create Newspost
-      description: Erstellt einen neuen Newspost.
+      description: Creates a new news post.
       requestBody:
         required: true
         content:
@@ -23,22 +23,22 @@ paths:
               $ref: '#/components/schemas/NewsPostCreate'
       responses:
         '200':
-          description: Newspost erstellt
+          description: News post created
     get:
       tags: [Newsfeed]
-      summary: Read Newspost (Liste)
-      description: Liest eine paginierte Liste von Newsposts, optional gefiltert nach Suchbegriff und/oder Datum.
+      summary: Read Newspost (List)
+      description: Reads a paginated list of news posts, optionally filtered by search term and/or date.
       parameters:
         - in: query
           name: query
-          description: Optionaler Suchbegriff, der in Titel und Zusammenfassung gesucht wird.
+          description: Optional search term to find in title and summary.
           required: false
           schema:
             type: string
           example: "Test"
         - in: query
           name: from
-          description: Optionales Startdatum, um nur Posts ab diesem Zeitpunkt zu erhalten.
+          description: Optional start date to get posts from this point in time.
           required: false
           schema:
             type: string
@@ -46,7 +46,7 @@ paths:
           example: "2025-09-13"
         - in: query
           name: to
-          description: Optionales Enddatum, um nur Posts bis zu diesem Zeitpunkt zu erhalten.
+          description: Optional end date to get posts up to this point in time.
           required: false
           schema:
             type: string
@@ -54,7 +54,7 @@ paths:
           example: "2025-09-18"
         - in: query
           name: page
-          description: Die abzurufende Seitenzahl (beginnend bei 0).
+          description: The page number to retrieve (starting at 0).
           required: true
           schema:
             type: integer
@@ -62,16 +62,15 @@ paths:
           example: 1
         - in: query
           name: pageSize
-          description: Die Anzahl der Einträge pro Seite.
+          description: The number of entries per page.
           required: true
           schema:
             type: integer
             minimum: 1
           example: 10
-
-      responses:   # 👈 hier eine Stufe eingerückt wie "parameters"
+      responses:
         '200':
-          description: Liste von Newsposts
+          description: List of news posts
           content:
             application/json:
               schema:
@@ -79,13 +78,11 @@ paths:
                 items:
                   $ref: '#/components/schemas/NewsPostRead'
 
-
-
   /newsfeed/{id}:
     put:
       tags: [Newsfeed]
       summary: Update Newspost
-      description: Aktualisiert einen bestehenden Newspost per ID.
+      description: Updates an existing news post by ID.
       parameters:
         - in: path
           name: id
@@ -99,11 +96,11 @@ paths:
               $ref: '#/components/schemas/NewsPostUpdate'
       responses:
         '200':
-          description: Newspost aktualisiert
+          description: News post updated
     delete:
       tags: [Newsfeed]
       summary: Delete Newspost
-      description: Löscht (oder markiert als gelöscht) einen Newspost per ID.
+      description: Deletes (or marks as deleted) a news post by ID.
       parameters:
         - in: path
           name: id
@@ -111,13 +108,13 @@ paths:
           schema: { type: string }
       responses:
         '200':
-          description: Newspost gelöscht
+          description: News post deleted
 
   /newsfeed/{id}/history:
     get:
       tags: [Newsfeed]
       summary: History Newspost
-      description: Gibt die Versionshistorie eines Newsposts zurück.
+      description: Returns the version history of a news post.
       parameters:
         - in: path
           name: id
@@ -125,26 +122,22 @@ paths:
           schema: { type: string }
       responses:
         '200':
-          description: Versionsliste
+          description: List of versions
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NewsPostHistoryItem'
+                  $ref: '#/components/schemas/NewsPostRevision' # <-- UPDATED to point to the new schema
 
 components:
   schemas:
     NewsPostCreate:
       type: object
-      required: [id, title, summary, status, content, author, creation_date]
+      required: [title, summary, status, content, author]
       properties:
-        id:
-          type: string
-        title:
-          type: string
-        summary:
-          type: string
+        title: { type: string }
+        summary: { type: string }
         status:
           type: string
           enum: [draft, published, archived, deleted]
@@ -154,14 +147,7 @@ components:
           $ref: '#/components/schemas/FeaturedImage'
         author:
           $ref: '#/components/schemas/Author'
-        creation_date:
-          type: string
-          format: date-time
         publish_date:
-          type: string
-          format: date-time
-          nullable: true
-        last_modified:
           type: string
           format: date-time
           nullable: true
@@ -175,11 +161,11 @@ components:
     NewsPostUpdate:
       allOf:
         - $ref: '#/components/schemas/NewsPostCreate'
-      description: Gleich wie Create-Struktur für Updates.
+      description: Same structure as Create for updates.
 
     NewsPostRead:
       type: object
-      required: [id, version, title, summary, status, content, author, creation_date]
+      required: [id, version, title, summary, status, content, author, creationDate, lastModified]
       properties:
         id: { type: string }
         version: { type: integer }
@@ -194,55 +180,44 @@ components:
           $ref: '#/components/schemas/FeaturedImage'
         author:
           $ref: '#/components/schemas/Author'
-        creation_date:
+        creationDate:
           type: string
           format: date-time
-        publish_date:
-          type: string
-          format: date-time
-          nullable: true
-        last_modified:
+        publishDate:
           type: string
           format: date-time
           nullable: true
+        lastModified:
+          type: string
+          format: date-time
         permissions:
           $ref: '#/components/schemas/PermissionsFlags'
         settings:
           $ref: '#/components/schemas/Settings'
 
-    NewsPostHistoryItem:
+    # --- NEW REVISION SCHEMA ---
+    # This replaces the old NewsPostHistoryItem and matches your DTO
+    NewsPostRevision:
       type: object
-      required: [id, version, title, summary, status, content, author, creation_date]
+      required: [revisionNumber, revisionTimestamp, revisionType, newsPostState]
       properties:
-        id: { type: string }
-        version: { type: integer }
-        title: { type: string }
-        slug: { type: string }
-        summary: { type: string }
-        status:
-          type: string
-          enum: [draft, published, archived, deleted]
-        content:
-          $ref: '#/components/schemas/Content'
-        featured_image:
-          $ref: '#/components/schemas/FeaturedImage'
-        author:
-          $ref: '#/components/schemas/Author'
-        creation_date:
+        revisionNumber:
+          type: integer
+          description: The unique ID of the revision.
+          example: 2
+        revisionTimestamp:
           type: string
           format: date-time
-        publish_date:
+          description: The timestamp when this revision was created.
+          example: "2025-09-20T14:30:00Z"
+        revisionType:
           type: string
-          format: date-time
-          nullable: true
-        last_modified:
-          type: string
-          format: date-time
-          nullable: true
-        permissions:
-          $ref: '#/components/schemas/PermissionsFlags'
-        settings:
-          $ref: '#/components/schemas/Settings'
+          description: The type of change (ADD, MOD, DEL for create, modify, delete).
+          enum: [ADD, MOD, DEL]
+          example: "MOD"
+        newsPostState:
+          description: The complete state of the news post at this revision.
+          $ref: '#/components/schemas/NewsPostRead' # Reuses the main read DTO for the snapshot
 
     Content:
       type: object
