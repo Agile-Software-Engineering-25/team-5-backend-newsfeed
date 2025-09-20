@@ -7,13 +7,12 @@ import org.hibernate.envers.RevisionType;
 
 import java.util.Date;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class NewsPostRevisionDto {
-    private int revisionNumber;
-    private Date revisionTimestamp;
-    private RevisionType revisionType;
-    private NewsPost newsPost;
+  private int revisionNumber;
+  private Date revisionTimestamp;
+  private RevisionType revisionType;
+  private NewsPost newsPost;
 }

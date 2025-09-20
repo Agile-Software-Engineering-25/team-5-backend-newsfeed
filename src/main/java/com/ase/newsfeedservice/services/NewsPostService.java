@@ -4,7 +4,6 @@ import com.ase.newsfeedservice.components.NewsPost;
 import com.ase.newsfeedservice.components.NewsPostRevisionDto;
 import com.ase.newsfeedservice.repositories.NewsPostRepository;
 
-import ch.qos.logback.core.joran.action.NewRuleAction;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.transaction.Transactional;
@@ -34,26 +33,26 @@ public class NewsPostService {
 
   @Autowired
   private EntityManager entityManager;
-  private final NewsPostRepository NewsPostRepo;
+  private final NewsPostRepository repository;
 
   public Page<NewsPost> listNewsPosts(String query, OffsetDateTime from, OffsetDateTime to, int page, int pageSize) {
     Pageable pageable = PageRequest.of(page, pageSize);
-    return NewsPostRepo.listNewsPosts(query, from, to, pageable);
+    return repository.listNewsPosts(query, from, to, pageable);
   }
 
   public NewsPost saveNewsPost(NewsPost newsPost) {
-    return NewsPostRepo.save(newsPost);
+    return repository.save(newsPost);
   }
 
   public NewsPost updateNewsPost(NewsPost newsPost) {
-    NewsPost existingPost = NewsPostRepo.findById(newsPost.getId())
+    NewsPost existingPost = repository.findById(newsPost.getId())
         .orElseThrow(() -> new RuntimeException("NewsPost not found"));
     BeanUtils.copyProperties(newsPost, existingPost, "id", "version");
-    return NewsPostRepo.save(existingPost);
+    return repository.save(existingPost);
   }
 
   public void deleteNewsPost(String id) {
-    NewsPostRepo.deleteById(id);
+    repository.deleteById(id);
   }
 
   @Transactional
