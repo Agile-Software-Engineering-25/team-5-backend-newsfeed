@@ -225,7 +225,7 @@ components:
       properties:
         format:
           type: string
-          enum: [markdown, html]
+          enum: [html]
         body:
           type: string
 
