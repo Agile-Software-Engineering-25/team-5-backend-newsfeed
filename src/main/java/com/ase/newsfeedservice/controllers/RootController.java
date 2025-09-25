@@ -4,10 +4,8 @@ import com.ase.newsfeedservice.components.NewsPost;
 import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
 import com.ase.newsfeedservice.services.NewsPostService;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-
 import java.util.List;
 
 @RestController
@@ -42,38 +39,29 @@ public class RootController {
 
   @GetMapping("/newsfeed")
   public List<NewsPost> list(
-      // Optional text search on title and summary
       @RequestParam(required = false) String query,
-
-      // Optional start of the date range
       @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String from,
-
-      // Optional end of the date range
       @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String to,
-
-      // Page number, REQUIRED
       @RequestParam int page,
-
-      // Number of items per page, REQUIRED
       @RequestParam int pageSize) {
 
     LocalDate localDateFrom = LocalDate.parse(from);
     LocalDate localDateTo = LocalDate.parse(to);
 
-    OffsetDateTime offsetDateTimeFrom = localDateFrom.atStartOfDay().atOffset(ZoneOffset.systemDefault()
-        .getRules().getOffset(localDateFrom.atStartOfDay()));
-    OffsetDateTime offsetDateTimeTo = localDateFrom.atStartOfDay().atOffset(ZoneOffset.systemDefault()
-        .getRules().getOffset(localDateTo.atStartOfDay()));
+    OffsetDateTime offsetDateTimeFrom = localDateFrom.atStartOfDay().atOffset(
+        ZoneOffset.systemDefault().getRules().getOffset(localDateFrom.atStartOfDay()));
+    OffsetDateTime offsetDateTimeTo = localDateFrom.atStartOfDay().atOffset(
+        ZoneOffset.systemDefault().getRules().getOffset(localDateTo.atStartOfDay()));
 
     int zeroBasedPage = page > 0 ? page - 1 : 0;
-    Page<NewsPost> newsPage = service.listNewsPosts(query, offsetDateTimeFrom, offsetDateTimeTo, zeroBasedPage,
-        pageSize);
+    Page<NewsPost> newsPage =
+        service.listNewsPosts(query, offsetDateTimeFrom, offsetDateTimeTo, zeroBasedPage, pageSize);
     return newsPage.getContent();
   }
 
   @PutMapping("/newsfeed/{id}")
   public ResponseEntity<NewsPost> update(@PathVariable String id, @RequestBody NewsPost newsPost) {
-    newsPost.setId(id); // Ensure the ID matches the path
+    newsPost.setId(id);
     NewsPost updated = service.updateNewsPost(newsPost);
     return ResponseEntity.ok(updated);
   }

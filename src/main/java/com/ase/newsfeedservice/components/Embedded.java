@@ -6,13 +6,17 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class Embedded {
+
   @Embeddable
-  @Data
+  @Getter
+  @Setter
   public static class Content {
     @Enumerated(EnumType.STRING)
     private ContentFormat format;
@@ -26,7 +30,8 @@ public class Embedded {
   }
 
   @Embeddable
-  @Data
+  @Getter
+  @Setter
   public static class FeaturedImage {
     private String url;
     private String altText;
@@ -34,7 +39,8 @@ public class Embedded {
   }
 
   @Embeddable
-  @Data
+  @Getter
+  @Setter
   public static class Author {
     private String userId;
     private String name;
@@ -42,14 +48,16 @@ public class Embedded {
   }
 
   @Embeddable
-  @Data
+  @Getter
+  @Setter
   public static class Expiration {
     private LocalDateTime expiresAt;
     private Boolean autoArchive;
   }
 
   @Embeddable
-  @Data
+  @Getter
+  @Setter
   public static class Permissions {
     @ElementCollection
     @CollectionTable(name = "news_post_read_permissions")
@@ -65,7 +73,8 @@ public class Embedded {
   }
 
   @Embeddable
-  @Data
+  @Getter
+  @Setter
   public static class PrincipalRef {
     private String id;
 
@@ -80,10 +89,10 @@ public class Embedded {
   }
 
   @Embeddable
-  @Data
+  @Getter
+  @Setter
   public static class Settings {
     private Boolean featured;
     private Boolean sticky;
   }
-
 }
