@@ -57,7 +57,7 @@ INSERT INTO news_posts (
              '<h1>Vaadin 24</h1><p>Check out the new grid features!</p>',
              'https://example.com/images/vaadin.png', 'Vaadin Logo', 'UI Update',
              'user-2', 'Bob Smith', 'https://example.com/avatars/bob.png',
-             CURRENT_TIMESTAMP, NULL, CURRENT_TIMESTAMP,
+             CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
              0,
              NULL, NULL,
              FALSE, TRUE
