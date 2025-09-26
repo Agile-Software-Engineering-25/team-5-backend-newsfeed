@@ -128,7 +128,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NewsPostRevision' # <-- UPDATED to point to the new schema
+                  $ref: '#/components/schemas/NewsPostRevision'
 
 components:
   schemas:
@@ -154,7 +154,7 @@ components:
         expiration:
           $ref: '#/components/schemas/Expiration'
         permissions:
-          $ref: '#/components/schemas/PermissionsRWX'
+          $ref: '#/components/schemas/PermissionsList'
         settings:
           $ref: '#/components/schemas/Settings'
 
@@ -191,12 +191,10 @@ components:
           type: string
           format: date-time
         permissions:
-          $ref: '#/components/schemas/PermissionsFlags'
+          $ref: '#/components/schemas/PermissionsList'
         settings:
           $ref: '#/components/schemas/Settings'
 
-    # --- NEW REVISION SCHEMA ---
-    # This replaces the old NewsPostHistoryItem and matches your DTO
     NewsPostRevision:
       type: object
       required: [revisionNumber, revisionTimestamp, revisionType, newsPostState]
@@ -217,7 +215,7 @@ components:
           example: "MOD"
         newsPostState:
           description: The complete state of the news post at this revision.
-          $ref: '#/components/schemas/NewsPostRead' # Reuses the main read DTO for the snapshot
+          $ref: '#/components/schemas/NewsPostRead'
 
     Content:
       type: object
@@ -254,35 +252,13 @@ components:
         auto_archive:
           type: boolean
           nullable: true
-
-    PrincipalRef:
-      type: object
-      required: [id, type, name]
-      properties:
-        id: { type: string }
-        type:
-          type: string
-          enum: [user, group]
-        name: { type: string }
-
-    PermissionsRWX:
-      type: object
-      properties:
-        read:
-          type: array
-          items: { $ref: '#/components/schemas/PrincipalRef' }
-        write:
-          type: array
-          items: { $ref: '#/components/schemas/PrincipalRef' }
-        delete:
-          type: array
-          items: { $ref: '#/components/schemas/PrincipalRef' }
-
-    PermissionsFlags:
-      type: object
-      properties:
-        update: { type: boolean }
-        delete: { type: boolean }
+          
+    PermissionsList:
+      type: array
+      description: A list of roles or permission strings assigned to the object.
+      items:
+        type: string
+      example: ["F2.Team-5.Read.NewsPost.<Fachbereich|Dozierende|Studierenede>", "F2.Team-5.Write.NewsPost.Admin"]
 
     Settings:
       type: object

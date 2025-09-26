@@ -7,9 +7,16 @@ import lombok.Data;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
+import com.ase.newsfeedservice.components.Embedded.Author;
+import com.ase.newsfeedservice.components.Embedded.Content;
+import com.ase.newsfeedservice.components.Embedded.Expiration;
+import com.ase.newsfeedservice.components.Embedded.FeaturedImage;
+import com.ase.newsfeedservice.components.Embedded.Settings;
+
 import static com.ase.newsfeedservice.components.Embedded.*;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -47,13 +54,10 @@ public class NewsPost {
   @Embedded
   private Expiration expiration;
 
-  @Embedded
-  @AttributeOverrides({
-      @AttributeOverride(name = "read", column = @Column(name = "permission_read")),
-      @AttributeOverride(name = "write", column = @Column(name = "permission_write")),
-      @AttributeOverride(name = "delete", column = @Column(name = "permission_delete"))
-  })
-  private Permissions permissions;
+  @ElementCollection(fetch = FetchType.LAZY)
+  @CollectionTable(name = "newspost_permissions", joinColumns = @JoinColumn(name = "id"))
+  @Column(name = "permission")
+  private List<String> permissions;
 
   @Embedded
   private Settings settings;

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 import com.ase.newsfeedservice.components.Embedded.*;
 
@@ -21,7 +22,7 @@ public class NewsPostCreateDto {
   private String publishDate;
   private String lastModified;
   private Expiration expiration;
-  private Permissions permissions;
+  private List<String> permissions;
   private Settings settings;
 
   public NewsPost toEntity() {
