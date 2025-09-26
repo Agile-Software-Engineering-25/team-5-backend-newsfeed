@@ -1,14 +1,11 @@
 package com.ase.newsfeedservice.components;
 
-import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Data;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.hibernate.envers.Audited;
 

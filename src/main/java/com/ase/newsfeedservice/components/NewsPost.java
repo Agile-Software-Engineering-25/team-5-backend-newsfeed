@@ -13,8 +13,6 @@ import com.ase.newsfeedservice.components.Embedded.Expiration;
 import com.ase.newsfeedservice.components.Embedded.FeaturedImage;
 import com.ase.newsfeedservice.components.Embedded.Settings;
 
-import static com.ase.newsfeedservice.components.Embedded.*;
-
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
