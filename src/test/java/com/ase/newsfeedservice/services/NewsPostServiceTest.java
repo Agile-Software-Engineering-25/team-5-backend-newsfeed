@@ -22,7 +22,7 @@ class NewsPostServiceTest {
   NewsPostService service;
 
   @Test
-  void saveNewsPost_shouldSaveAndReturnNewsPost() {
+  void saveNewsPostShouldSaveAndReturnNewsPost() {
     NewsPost post = new NewsPost();
     post.setId("123");
     when(repository.save(post)).thenReturn(post);
@@ -34,7 +34,7 @@ class NewsPostServiceTest {
   }
 
   @Test
-  void updateNewsPost_shouldUpdateExistingPost() {
+  void updateNewsPostShouldUpdateExistingPost() {
     NewsPost post = new NewsPost();
     post.setId("123");
     post.setTitle("Updated");
@@ -54,7 +54,7 @@ class NewsPostServiceTest {
   }
 
   @Test
-  void updateNewsPost_shouldThrowIfNotFound() {
+  void updateNewsPostShouldThrowIfNotFound() {
     NewsPost post = new NewsPost();
     post.setId("notfound");
 
@@ -64,11 +64,11 @@ class NewsPostServiceTest {
   }
 
   @Test
-  void listNewsPosts_shouldReturnPage() {
+  void listNewsPostsShouldReturnPage() {
     Page<NewsPost> page = new PageImpl<>(List.of(new NewsPost()));
     when(repository.listNewsPosts(any(), any(), any(), any())).thenReturn(page);
 
-    Page<NewsPost> result = service.listNewsPosts(null, null, null, 0, 10);
+    Page<NewsPost> result = service.listNewsPosts(null, null, null, 0, 11);
 
     assertEquals(1, result.getContent().size());
     verify(repository).listNewsPosts(any(), any(), any(), any());
