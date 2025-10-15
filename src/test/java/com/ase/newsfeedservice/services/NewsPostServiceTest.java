@@ -63,12 +63,14 @@ class NewsPostServiceTest {
     assertThrows(NewsPostNotFoundException.class, () -> service.updateNewsPost(post));
   }
 
+  private static final int PAGE_SIZE = 10;
+
   @Test
   void listNewsPostsShouldReturnPage() {
     Page<NewsPost> page = new PageImpl<>(List.of(new NewsPost()));
     when(repository.listNewsPosts(any(), any(), any(), any())).thenReturn(page);
 
-    Page<NewsPost> result = service.listNewsPosts(null, null, null, 0, 11);
+    Page<NewsPost> result = service.listNewsPosts(null, null, null, 0, PAGE_SIZE);
 
     assertEquals(1, result.getContent().size());
     verify(repository).listNewsPosts(any(), any(), any(), any());
