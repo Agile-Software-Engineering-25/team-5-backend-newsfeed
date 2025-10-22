@@ -10,6 +10,7 @@ import org.springframework.data.domain.*;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(org.mockito.junit.jupiter.MockitoExtension.class)
@@ -64,13 +65,14 @@ class NewsPostServiceTest {
   }
 
   private static final int PAGE_SIZE = 10;
+  private List<String> groups = List.of("asdf");
 
   @Test
   void listNewsPostsShouldReturnPage() {
     Page<NewsPost> page = new PageImpl<>(List.of(new NewsPost()));
     when(repository.listNewsPosts(any(), any(), any(), any())).thenReturn(page);
 
-    Page<NewsPost> result = service.listNewsPosts(null, null, null, 0, PAGE_SIZE, ['asdf']);
+    Page<NewsPost> result = service.listNewsPosts(null, null, null, 0, PAGE_SIZE, groups);
 
     assertEquals(1, result.getContent().size());
     verify(repository).listNewsPosts(any(), any(), any(), any());
