@@ -23,12 +23,12 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/admin/**").hasAuthority("GROUP_admin")
-            .requestMatchers("/editor/**").hasAuthority("GROUP_editor")
-            .requestMatchers("/posts/**").authenticated()
-            .anyRequest().denyAll())
+        .requestMatchers("/admin/**").hasAuthority("GROUP_admin")
+        .requestMatchers("/editor/**").hasAuthority("GROUP_editor")
+        .requestMatchers("/posts/**").authenticated()
+        .anyRequest().denyAll())
         .oauth2ResourceServer(oauth2 -> oauth2
-            .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
+        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
 
     return http.build();
   }
