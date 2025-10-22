@@ -5,6 +5,8 @@ import com.ase.newsfeedservice.components.NewsPostRevisionDto;
 import com.ase.newsfeedservice.services.NewsPostService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -42,21 +44,23 @@ public class RootController {
   }
 
   @GetMapping("/newsfeed")
-  public List<NewsPost> list(
+  public List<NewsPost> get(
       // Optional text search on title and summary
       @RequestParam(required = false) String query,
-
       // Optional start of the date range
       @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String from,
-
       // Optional end of the date range
       @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String to,
-
       // Page number, REQUIRED
       @RequestParam int page,
-
       // Number of items per page, REQUIRED
-      @RequestParam int pageSize) {
+      @RequestParam int pageSize,
+      Authentication authentication
+      ) {
+
+    Jwt jwt = (Jwt) authentication.getPrincipal();
+    List<String> groups = jwt.getClaimAsStringList("groups"); // TODO
+    
 
     OffsetDateTime offsetDateTimeFrom = null;
     OffsetDateTime offsetDateTimeTo = null;
@@ -72,7 +76,7 @@ public class RootController {
 
     int zeroBasedPage = page > 0 ? page - 1 : 0;
     Page<NewsPost> newsPage = service.listNewsPosts(query, offsetDateTimeFrom, offsetDateTimeTo, zeroBasedPage,
-        pageSize);
+        pageSize, groups);
     return newsPage.getContent();
   }
 

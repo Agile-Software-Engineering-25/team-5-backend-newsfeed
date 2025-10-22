@@ -35,7 +35,14 @@ public class NewsPostService {
   private EntityManager entityManager;
   private final NewsPostRepository repository;
 
-  public Page<NewsPost> listNewsPosts(String query, OffsetDateTime from, OffsetDateTime to, int page, int pageSize) {
+  public Page<NewsPost> listNewsPosts(
+      String query, 
+      OffsetDateTime from, 
+      OffsetDateTime to, 
+      int page, 
+      int pageSize,
+      List<String> groups
+    ) {
     Pageable pageable = PageRequest.of(page, pageSize);
     return repository.listNewsPosts(query, from, to, pageable);
   }
