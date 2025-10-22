@@ -1,8 +1,19 @@
 package com.ase.newsfeedservice.components;
 
-import jakarta.persistence.*;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import lombok.Getter;
+import lombok.Setter;
 
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
@@ -18,11 +29,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "news_posts")
 @Audited
 @AuditTable("news_post_aud")
 public class NewsPost {
+
   @Id
   @Column(nullable = false, updatable = false)
   private String id;

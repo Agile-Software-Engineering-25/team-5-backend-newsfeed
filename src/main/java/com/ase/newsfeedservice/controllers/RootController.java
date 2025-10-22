@@ -9,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-
 import java.util.List;
 
 @RestController
@@ -77,7 +75,7 @@ public class RootController {
 
   @PutMapping("/newsfeed/{id}")
   public ResponseEntity<NewsPost> update(@PathVariable String id, @RequestBody NewsPost newsPost) {
-    newsPost.setId(id); // Ensure the ID matches the path
+    newsPost.setId(id);
     NewsPost updated = service.updateNewsPost(newsPost);
     return ResponseEntity.ok(updated);
   }
