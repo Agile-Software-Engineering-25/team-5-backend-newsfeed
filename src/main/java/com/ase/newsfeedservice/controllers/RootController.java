@@ -45,17 +45,12 @@ public class RootController {
 
   @GetMapping("/newsfeed")
   public List<NewsPost> get(
-    // Optional text search on title and summary
-    @RequestParam(required = false) String query,
-    // Optional start of the date range
-    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String from,
-    // Optional end of the date range
-    @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String to,
-    // Page number, REQUIRED
-    @RequestParam int page,
-    // Number of items per page, REQUIRED
-    @RequestParam int pageSize,
-    Authentication authentication
+      @RequestParam(required = false) String query,
+      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String from,
+      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String to,
+      @RequestParam int page,
+      @RequestParam int pageSize,
+      Authentication authentication
   ) {
 
     Jwt jwt = (Jwt) authentication.getPrincipal();
