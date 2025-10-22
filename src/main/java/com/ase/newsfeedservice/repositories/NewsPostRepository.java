@@ -19,7 +19,7 @@ public interface NewsPostRepository extends JpaRepository<NewsPost, String> {
         AND (:from IS NULL OR np.publishDate >= :from)
         AND (:to IS NULL OR np.publishDate <= :to)
         AND (perm IN :groups)
-    """)
+      """)
   Page<NewsPost> listNewsPosts(
       @Param("query") String query,
       @Param("from") OffsetDateTime from,
