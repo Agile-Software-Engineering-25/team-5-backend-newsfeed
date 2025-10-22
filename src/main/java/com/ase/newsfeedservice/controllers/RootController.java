@@ -56,7 +56,7 @@ public class RootController {
       // Number of items per page, REQUIRED
       @RequestParam int pageSize,
       Authentication authentication
-      ) {
+    ) {
 
     Jwt jwt = (Jwt) authentication.getPrincipal();
     List<String> groups = jwt.getClaimAsStringList("groups"); // TODO
