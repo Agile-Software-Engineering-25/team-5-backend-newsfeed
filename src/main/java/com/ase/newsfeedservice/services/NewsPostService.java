@@ -22,6 +22,7 @@ import com.ase.newsfeedservice.exceptions.NewsPostNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,11 +53,13 @@ public class NewsPostService {
   }
 
   @Transactional
+  @PreAuthorize("hasAuthority('GROUP_editor')")
   public NewsPost saveNewsPost(NewsPost newsPost) {
     return repository.save(newsPost);
   }
 
   @Transactional
+  @PreAuthorize("hasAuthority('GROUP_editor')")
   public NewsPost updateNewsPost(NewsPost newsPost) {
     Objects.requireNonNull(newsPost.getId(), "newsPost.id must not be null");
 
@@ -70,6 +73,7 @@ public class NewsPostService {
   }
 
   @Transactional
+  @PreAuthorize("hasAuthority('GROUP_editor')")
   public void deleteNewsPost(String id) {
     repository.deleteById(id);
   }
@@ -100,6 +104,7 @@ public class NewsPostService {
         .collect(Collectors.toList());
   }
 
+  @PreAuthorize("hasAuthority('GROUP_admin')")
   private NewsPostRevisionDto mapToRevisionDTO(Object[] revision) {
     NewsPost articleAtRevision = (NewsPost) revision[0];
     DefaultRevisionEntity revisionInfo = (DefaultRevisionEntity) revision[1];
