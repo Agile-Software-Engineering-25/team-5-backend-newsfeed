@@ -6,7 +6,6 @@ import com.ase.newsfeedservice.repositories.NewsPostRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
-import jakarta.transaction.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,11 +17,8 @@ import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.ase.newsfeedservice.components.NewsPostHistoryItemDto;
+
 import com.ase.newsfeedservice.exceptions.NewsPostNotFoundException;
-import com.ase.newsfeedservice.repositories.NewsPostRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -51,6 +47,7 @@ public class NewsPostService {
       int pageSize,
       List<String> groups
   ) {
+    Pageable pageable = PageRequest.of(page, pageSize);
     return repository.listNewsPosts(query, from, to, pageable);
   }
 

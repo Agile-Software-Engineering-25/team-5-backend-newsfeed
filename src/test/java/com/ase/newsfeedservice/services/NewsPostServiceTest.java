@@ -70,7 +70,7 @@ class NewsPostServiceTest {
     Page<NewsPost> page = new PageImpl<>(List.of(new NewsPost()));
     when(repository.listNewsPosts(any(), any(), any(), any())).thenReturn(page);
 
-    Page<NewsPost> result = service.listNewsPosts(null, null, null, 0, PAGE_SIZE);
+    Page<NewsPost> result = service.listNewsPosts(null, null, null, 0, PAGE_SIZE, ['asdf']);
 
     assertEquals(1, result.getContent().size());
     verify(repository).listNewsPosts(any(), any(), any(), any());

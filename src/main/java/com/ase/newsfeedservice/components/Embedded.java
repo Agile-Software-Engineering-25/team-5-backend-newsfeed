@@ -6,6 +6,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
@@ -60,25 +61,6 @@ public class Embedded {
   public static class Expiration {
     private LocalDateTime expiresAt;
     private Boolean autoArchive;
-  }
-
-  @Embeddable
-  @Data
-  @Audited
-  @Getter
-  @Setter
-  public static class Permissions {
-    @ElementCollection
-    @CollectionTable(name = "news_post_read_permissions")
-    private List<PrincipalRef> read;
-
-    @ElementCollection
-    @CollectionTable(name = "news_post_write_permissions")
-    private List<PrincipalRef> write;
-
-    @ElementCollection
-    @CollectionTable(name = "news_post_delete_permissions")
-    private List<PrincipalRef> delete;
   }
 
   @Embeddable

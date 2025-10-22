@@ -1,19 +1,22 @@
 package com.ase.newsfeedservice.components;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
 
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
