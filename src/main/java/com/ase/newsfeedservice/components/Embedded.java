@@ -1,20 +1,22 @@
 package com.ase.newsfeedservice.components;
 
-import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
+import org.hibernate.envers.Audited;
 
 public class Embedded {
 
   @Embeddable
+  @Data
+  @Audited
   @Getter
   @Setter
   public static class Content {
@@ -30,6 +32,8 @@ public class Embedded {
   }
 
   @Embeddable
+  @Data
+  @Audited
   @Getter
   @Setter
   public static class FeaturedImage {
@@ -39,6 +43,8 @@ public class Embedded {
   }
 
   @Embeddable
+  @Data
+  @Audited
   @Getter
   @Setter
   public static class Author {
@@ -48,28 +54,13 @@ public class Embedded {
   }
 
   @Embeddable
+  @Data
+  @Audited
   @Getter
   @Setter
   public static class Expiration {
     private LocalDateTime expiresAt;
     private Boolean autoArchive;
-  }
-
-  @Embeddable
-  @Getter
-  @Setter
-  public static class Permissions {
-    @ElementCollection
-    @CollectionTable(name = "news_post_read_permissions")
-    private List<PrincipalRef> read;
-
-    @ElementCollection
-    @CollectionTable(name = "news_post_write_permissions")
-    private List<PrincipalRef> write;
-
-    @ElementCollection
-    @CollectionTable(name = "news_post_delete_permissions")
-    private List<PrincipalRef> delete;
   }
 
   @Embeddable
