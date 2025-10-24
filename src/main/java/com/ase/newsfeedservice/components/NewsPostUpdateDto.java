@@ -12,18 +12,18 @@ public class NewsPostUpdateDto {
 
  // properties:
  // title: { type: string }
- private String title;
+  private String title;
     
  // content: { $ref: '#/components/schemas/Content' }
- private Content content;
+  private Content content;
     
  // author: { $ref: '#/components/schemas/Author' }
- private Author author;
+  private Author author;
   
  // creationDate: { type: string, format: date-time }
- private String creationDate; 
+  private String creationDate; 
   
  // permissions: { $ref: '#/components/schemas/PermissionsList' } -> List<String>
- private List<String> permissions;
+  private List<String> permissions;
 
 }

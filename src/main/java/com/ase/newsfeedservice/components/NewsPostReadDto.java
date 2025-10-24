@@ -15,13 +15,13 @@ public class NewsPostReadDto {
 
 
   public static NewsPostReadDto fromEntity(NewsPost entity) {
-  NewsPostReadDto dto = new NewsPostReadDto();
-  dto.setId(entity.getId());
-  dto.setTitle(entity.getTitle());
-  dto.setContent(entity.getContent());
-  dto.setAuthor(entity.getAuthor());
-  dto.setCreationDate(entity.getCreationDate().toString());
+    NewsPostReadDto dto = new NewsPostReadDto();
+    dto.setId(entity.getId());
+    dto.setTitle(entity.getTitle());
+    dto.setContent(entity.getContent());
+    dto.setAuthor(entity.getAuthor());
+    dto.setCreationDate(entity.getCreationDate().toString());
 
-  return dto;
- }
+    return dto;
+  }
 }
