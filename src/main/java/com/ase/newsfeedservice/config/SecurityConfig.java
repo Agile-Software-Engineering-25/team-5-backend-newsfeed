@@ -15,6 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 //   "exp": 1734300000
 // }
 
+
+/* 
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
@@ -44,3 +46,4 @@ public class SecurityConfig {
     return converter;
   }
 }
+*/
