@@ -1,6 +1,7 @@
 package com.ase.newsfeedservice.repositories;
 import com.ase.newsfeedservice.components.NewsPost;
 import java.time.OffsetDateTime;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,5 +25,7 @@ public interface NewsPostRepository extends JpaRepository<NewsPost, String> {
       @Param("query") String query,
       @Param("from") OffsetDateTime from,
       @Param("to") OffsetDateTime to,
-      Pageable pageable);
+      Pageable pageable,
+      @Param("groups") List<String> groups
+    );
 }
