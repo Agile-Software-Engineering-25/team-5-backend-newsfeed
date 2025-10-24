@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: API for News Posts (Create, Read, Update, Delete) and Version History.
 servers:
-  - url: /
+  - url: http://localhost:8080
 tags:
   - name: Newsfeed
     description: Newspost Operations
@@ -22,8 +22,12 @@ paths:
             schema:
               $ref: '#/components/schemas/NewsPostCreate'
       responses:
-        '200':
+        '201':
           description: News post created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsPostRead'
     get:
       tags: [Newsfeed]
       summary: Read Newspost (List)
@@ -43,7 +47,7 @@ paths:
           schema:
             type: string
             format: date-time
-          example: "2025-09-13"
+          example: "2025-09-13T00:00:00Z"
         - in: query
           name: to
           description: Optional end date to get posts up to this point in time.
@@ -51,7 +55,7 @@ paths:
           schema:
             type: string
             format: date-time
-          example: "2025-09-18"
+          example: "2025-09-18T23:59:59Z"
         - in: query
           name: page
           description: The page number to retrieve (starting at 0).
@@ -97,6 +101,10 @@ paths:
       responses:
         '200':
           description: News post updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsPostRead'
     delete:
       tags: [Newsfeed]
       summary: Delete Newspost
@@ -107,8 +115,8 @@ paths:
           required: true
           schema: { type: string }
       responses:
-        '200':
-          description: News post deleted
+        '204':
+          description: News post deleted (no content)
 
   /newsfeed/{id}/history:
     get:
@@ -134,66 +142,48 @@ components:
   schemas:
     NewsPostCreate:
       type: object
-      required: [title, summary, status, content, author]
+      required: [title, content, author]
       properties:
         title: { type: string }
-        summary: { type: string }
-        status:
-          type: string
-          enum: [draft, published, archived, deleted]
         content:
           $ref: '#/components/schemas/Content'
-        featured_image:
-          $ref: '#/components/schemas/FeaturedImage'
-        author:
-          $ref: '#/components/schemas/Author'
-        publish_date:
-          type: string
-          format: date-time
-          nullable: true
-        expiration:
-          $ref: '#/components/schemas/Expiration'
-        permissions:
-          $ref: '#/components/schemas/PermissionsList'
-        settings:
-          $ref: '#/components/schemas/Settings'
-
-    NewsPostUpdate:
-      allOf:
-        - $ref: '#/components/schemas/NewsPostCreate'
-      description: Same structure as Create for updates.
-
-    NewsPostRead:
-      type: object
-      required: [id, version, title, summary, status, content, author, creationDate, lastModified]
-      properties:
-        id: { type: string }
-        version: { type: integer }
-        title: { type: string }
-        summary: { type: string }
-        status:
-          type: string
-          enum: [draft, published, archived, deleted]
-        content:
-          $ref: '#/components/schemas/Content'
-        featured_image:
-          $ref: '#/components/schemas/FeaturedImage'
         author:
           $ref: '#/components/schemas/Author'
         creationDate:
           type: string
           format: date-time
-        publishDate:
-          type: string
-          format: date-time
-          nullable: true
-        lastModified:
+        permissions:
+          $ref: '#/components/schemas/PermissionsList'
+
+    # Optional: „Partial Update“ ohne Requireds
+    NewsPostUpdate:
+      type: object
+      properties:
+        title: { type: string }
+        content:
+          $ref: '#/components/schemas/Content'
+        author:
+          $ref: '#/components/schemas/Author'
+        creationDate:
           type: string
           format: date-time
         permissions:
           $ref: '#/components/schemas/PermissionsList'
-        settings:
-          $ref: '#/components/schemas/Settings'
+      description: All fields optional; use for full or partial updates.
+
+    NewsPostRead:
+      type: object
+      required: [id, title, content, author, creationDate]
+      properties:
+        id: { type: string }
+        title: { type: string }
+        content:
+          $ref: '#/components/schemas/Content'
+        author:
+          $ref: '#/components/schemas/Author'
+        creationDate:
+          type: string
+          format: date-time
 
     NewsPostRevision:
       type: object
@@ -227,41 +217,18 @@ components:
         body:
           type: string
 
-    FeaturedImage:
-      type: object
-      properties:
-        url: { type: string, format: uri }
-        alt_text: { type: string }
-        caption: { type: string }
-
     Author:
       type: object
       required: [user_id, name]
       properties:
         user_id: { type: string }
         name: { type: string }
-        avatar_url: { type: string, format: uri, nullable: true }
 
-    Expiration:
-      type: object
-      properties:
-        expires_at:
-          type: string
-          format: date-time
-          nullable: true
-        auto_archive:
-          type: boolean
-          nullable: true
-          
     PermissionsList:
       type: array
       description: A list of roles or permission strings assigned to the object.
       items:
         type: string
-      example: ["F2.Team-5.Read.NewsPost.<Fachbereich|Dozierende|Studierenede>", "F2.Team-5.Write.NewsPost.Admin"]
-
-    Settings:
-      type: object
-      properties:
-        featured: { type: boolean }
-        sticky: { type: boolean }
+      example:
+        - "F2.Team-5.Read.NewsPost.<Fachbereich|Dozierende|Studierende>"
+        - "F2.Team-5.Write.NewsPost.Admin"
