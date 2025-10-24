@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 
 import org.hibernate.envers.Audited;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Embedded {
 
   @Embeddable
@@ -27,7 +29,7 @@ public class Embedded {
     private String body;
 
     public enum ContentFormat {
-      markdown, html
+     html
     }
   }
 
@@ -48,9 +50,12 @@ public class Embedded {
   @Getter
   @Setter
   public static class Author {
+    // HINZUGEFÜGT: Diese Annotation mappt das Java-Feld 'userId'
+    // auf das JSON-Feld 'user_id' aus der YAML-Datei.
+    @JsonProperty("user_id")
     private String userId;
+
     private String name;
-    private String avatarUrl;
   }
 
   @Embeddable

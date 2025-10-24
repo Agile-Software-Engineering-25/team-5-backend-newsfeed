@@ -11,35 +11,42 @@ import com.ase.newsfeedservice.components.Embedded.*;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class NewsPostCreateDto {
+
+  // HINZUGEFÜGT: 'id' (optional laut YAML)
   private String id;
+
   private String title;
-  private String summary;
-  private String status;
   private Content content;
-  private FeaturedImage featuredImage;
   private Author author;
+
+  // HINZUGEFÜGT: 'creationDate' (optional laut YAML)
+  // Als String, um das 'format: date-time' aus der YAML zu empfangen
   private String creationDate;
-  private String publishDate;
-  private String lastModified;
-  private Expiration expiration;
+
+  // HINZUGEFÜGT: 'permissions' (optional laut YAML)
   private List<String> permissions;
-  private Settings settings;
+
 
   public NewsPost toEntity() {
     NewsPost entity = new NewsPost();
-    entity.setId(id);
+    
+    // HINZUGEFÜGT: Mapping für die neuen Felder
+    entity.setId(this.id); // 'PrePersist' in NewsPost füllt die ID, falls sie null ist
+    entity.setPermissions(this.permissions);
+
+    // HINZUGEFÜGT: Parsen des Datums-Strings zur Entität
+    if (this.creationDate != null && !this.creationDate.isEmpty()) {
+        try {
+            entity.setCreationDate(OffsetDateTime.parse(this.creationDate));
+        } catch (java.time.format.DateTimeParseException e) {
+            // Optional: Fehlerbehandlung, falls das Datumsformat ungültig ist
+            // Vorerst wird es ignoriert, wenn es nicht geparst werden kann
+        }
+    }
+    
     entity.setTitle(title);
-    entity.setSummary(summary);
-    entity.setStatus(NewsPost.NewsPostStatus.valueOf(status));
     entity.setContent(content);
-    entity.setFeaturedImage(featuredImage);
     entity.setAuthor(author);
-    entity.setCreationDate(creationDate != null ? OffsetDateTime.parse(creationDate) : null);
-    entity.setPublishDate(publishDate != null ? OffsetDateTime.parse(publishDate) : null);
-    entity.setLastModified(lastModified != null ? OffsetDateTime.parse(lastModified) : null);
-    entity.setExpiration(expiration);
-    entity.setPermissions(permissions);
-    entity.setSettings(settings);
     return entity;
   }
 }
