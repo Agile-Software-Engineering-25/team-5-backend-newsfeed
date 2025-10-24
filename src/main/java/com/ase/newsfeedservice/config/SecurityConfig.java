@@ -1,6 +1,7 @@
 package com.ase.newsfeedservice.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -16,8 +17,6 @@ import org.springframework.security.web.SecurityFilterChain;
 //   "exp": 1734300000
 // }
 
-
-/* 
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
