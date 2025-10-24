@@ -8,22 +8,22 @@ import java.util.List; // Für PermissionsList
 
 @Data
 public class NewsPostUpdateDto { 
-    // ACHTUNG: Keine Vererbung von NewsPostCreateDto mehr!
+ // ACHTUNG: Keine Vererbung von NewsPostCreateDto mehr!
 
-    // properties:
-    // title: { type: string }
-    private String title;
+ // properties:
+ // title: { type: string }
+ private String title;
     
-    // content: { $ref: '#/components/schemas/Content' }
-    private Content content;
+ // content: { $ref: '#/components/schemas/Content' }
+ private Content content;
     
-    // author: { $ref: '#/components/schemas/Author' }
-    private Author author;
-    
-    // creationDate: { type: string, format: date-time }
-    private String creationDate; 
-    
-    // permissions: { $ref: '#/components/schemas/PermissionsList' } -> List<String>
-    private List<String> permissions;
+ // author: { $ref: '#/components/schemas/Author' }
+ private Author author;
+  
+ // creationDate: { type: string, format: date-time }
+ private String creationDate; 
+  
+ // permissions: { $ref: '#/components/schemas/PermissionsList' } -> List<String>
+ private List<String> permissions;
 
 }

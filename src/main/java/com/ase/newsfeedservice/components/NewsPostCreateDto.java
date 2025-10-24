@@ -28,25 +28,25 @@ public class NewsPostCreateDto {
 
 
   public NewsPost toEntity() {
-    NewsPost entity = new NewsPost();
+  NewsPost entity = new NewsPost();
     
-    // HINZUGEFÜGT: Mapping für die neuen Felder
-    entity.setId(this.id); // 'PrePersist' in NewsPost füllt die ID, falls sie null ist
-    entity.setPermissions(this.permissions);
+  // HINZUGEFÜGT: Mapping für die neuen Felder
+  entity.setId(this.id); // 'PrePersist' in NewsPost füllt die ID, falls sie null ist
+   entity.setPermissions(this.permissions);
 
-    // HINZUGEFÜGT: Parsen des Datums-Strings zur Entität
-    if (this.creationDate != null && !this.creationDate.isEmpty()) {
-        try {
-            entity.setCreationDate(OffsetDateTime.parse(this.creationDate));
-        } catch (java.time.format.DateTimeParseException e) {
-            // Optional: Fehlerbehandlung, falls das Datumsformat ungültig ist
-            // Vorerst wird es ignoriert, wenn es nicht geparst werden kann
-        }
+   // HINZUGEFÜGT: Parsen des Datums-Strings zur Entität
+   if (this.creationDate != null && !this.creationDate.isEmpty()) {
+   try {
+      entity.setCreationDate(OffsetDateTime.parse(this.creationDate));
+      } catch (java.time.format.DateTimeParseException e) {
+      // Optional: Fehlerbehandlung, falls das Datumsformat ungültig ist
+      // Vorerst wird es ignoriert, wenn es nicht geparst werden kann
     }
-    
-    entity.setTitle(title);
-    entity.setContent(content);
-    entity.setAuthor(author);
-    return entity;
   }
+    
+  entity.setTitle(title);
+  entity.setContent(content);
+  entity.setAuthor(author);
+  return entity;
+ }
 }
