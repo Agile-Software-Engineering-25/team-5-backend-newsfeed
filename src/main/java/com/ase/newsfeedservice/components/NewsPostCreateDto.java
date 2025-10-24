@@ -36,14 +36,14 @@ public class NewsPostCreateDto {
 
    // HINZUGEFÜGT: Parsen des Datums-Strings zur Entität
     if (this.creationDate != null && !this.creationDate.isEmpty()) {
-     try {
+      try {
         entity.setCreationDate(OffsetDateTime.parse(this.creationDate));
-        }
+      }
       catch (java.time.format.DateTimeParseException e) {
       // Optional: Fehlerbehandlung, falls das Datumsformat ungültig ist
       // Vorerst wird es ignoriert, wenn es nicht geparst werden kann
+      }
     }
-  }
     
     entity.setTitle(title);
     entity.setContent(content);
