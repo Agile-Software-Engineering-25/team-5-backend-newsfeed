@@ -49,7 +49,7 @@ public class NewsPostService {
       List<String> groups
   ) {
     Pageable pageable = PageRequest.of(page, pageSize);
-    return repository.listNewsPosts(query, from, to, pageable);
+    return repository.listNewsPosts(query, from, to, pageable, groups);
   }
 
   @Transactional

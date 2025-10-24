@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,8 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
+
+
 
 @RestController
 @RequiredArgsConstructor
@@ -41,6 +45,9 @@ public class RootController {
     return ResponseEntity.ok(saved);
   }
 
+  @Value("${spring.profiles.active:}")
+  private String activeProfile;
+
   @GetMapping("/newsfeed")
   public List<NewsPost> get(
       @RequestParam(required = false) String query,
@@ -51,8 +58,15 @@ public class RootController {
       Authentication authentication
   ) {
 
-    Jwt jwt = (Jwt) authentication.getPrincipal();
-    List<String> groups = jwt.getClaimAsStringList("groups"); // TODO
+    List<String> groups = List.of();
+
+    if ("dev".equalsIgnoreCase(activeProfile)) {
+      groups = List.of("admin");
+    }
+    else {
+      Jwt jwt = (Jwt) authentication.getPrincipal();
+      groups = jwt.getClaimAsStringList("groups");
+    }
     
 
     OffsetDateTime offsetDateTimeFrom = null;
