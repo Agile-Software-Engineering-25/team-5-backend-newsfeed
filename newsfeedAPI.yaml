@@ -10,7 +10,7 @@ tags:
     description: Newspost Operations
 
 paths:
-  /newsfeed:
+  /api/newsfeed:
     post:
       tags: [Newsfeed]
       summary: Create Newspost
@@ -82,7 +82,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/NewsPostRead'
 
-  /newsfeed/{id}:
+  /api/newsfeed/{id}:
     put:
       tags: [Newsfeed]
       summary: Update Newspost
@@ -118,7 +118,7 @@ paths:
         '204':
           description: News post deleted (no content)
 
-  /newsfeed/{id}/history:
+  /api/newsfeed/{id}/history:
     get:
       tags: [Newsfeed]
       summary: History Newspost
