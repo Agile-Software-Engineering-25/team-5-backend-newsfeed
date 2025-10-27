@@ -23,9 +23,6 @@ import org.hibernate.envers.Audited;
 
 import com.ase.newsfeedservice.components.Embedded.Author;
 import com.ase.newsfeedservice.components.Embedded.Content;
-import com.ase.newsfeedservice.components.Embedded.Expiration;
-import com.ase.newsfeedservice.components.Embedded.FeaturedImage;
-import com.ase.newsfeedservice.components.Embedded.Settings;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -44,37 +41,19 @@ public class NewsPost {
   private String id;
 
   private String title;
-  private String summary;
-
-  @Enumerated(EnumType.STRING)
-  private NewsPostStatus status;
 
   @Embedded
   private Content content;
 
   @Embedded
-  private FeaturedImage featuredImage;
-
-  @Embedded
   private Author author;
 
   private OffsetDateTime creationDate;
-  private OffsetDateTime publishDate;
-  private OffsetDateTime lastModified;
-
-  @Version
-  private Integer version;
-
-  @Embedded
-  private Expiration expiration;
 
   @ElementCollection(fetch = FetchType.LAZY)
   @CollectionTable(name = "newspost_permissions", joinColumns = @JoinColumn(name = "id"))
   @Column(name = "permission")
   private List<String> permissions;
-
-  @Embedded
-  private Settings settings;
 
   @PrePersist
   public void ensureId() {
@@ -84,17 +63,5 @@ public class NewsPost {
     if (this.creationDate == null) {
       this.creationDate = OffsetDateTime.now();
     }
-    if (this.lastModified == null) {
-      this.lastModified = OffsetDateTime.now();
-    }
-  }
-
-  @PreUpdate
-  public void updateModifiedDate() {
-    this.lastModified = OffsetDateTime.now();
-  }
-
-  public enum NewsPostStatus {
-    draft, published, archived, deleted
   }
 }
