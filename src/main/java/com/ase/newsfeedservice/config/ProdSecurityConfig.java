@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-
 /*
 Area-2.Team-5.Read.NewsPost-Engineering 
 Area-2.Team-5.Read.NewsPost-Business
@@ -31,40 +30,38 @@ lecturer
 @Profile("!dev")
 public class ProdSecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/**").hasAuthority("Area-2.Team-5.Write.NewsPost-Admin")
-                .anyRequest().denyAll()
-            )
-            .oauth2ResourceServer(oauth2 -> oauth2
-                .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
-            );
-        return http.build();
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/**").hasAuthority("Area-2.Team-5.Write.NewsPost-Admin")
+            .anyRequest().denyAll())
+        .oauth2ResourceServer(oauth2 -> oauth2
+            .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
+    return http.build();
+  }
+
+  @Bean
+  public JwtAuthenticationConverter jwtAuthenticationConverter() {
+    JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
+    converter.setJwtGrantedAuthoritiesConverter(this::extractRealmRoles);
+    return converter;
+  }
+
+  private Collection<GrantedAuthority> extractRealmRoles(Jwt jwt) {
+    Map<String, Object> realmAccess = jwt.getClaim("realm_access");
+    if (realmAccess == null) {
+      return List.of();
     }
 
-    @Bean
-    public JwtAuthenticationConverter jwtAuthenticationConverter() {
-        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-        converter.setJwtGrantedAuthoritiesConverter(this::extractRealmRoles);
-        return converter;
+    Object rolesObj = realmAccess.get("roles");
+    if (!(rolesObj instanceof List<?> roles)) {
+      return List.of();
     }
 
-    private Collection<GrantedAuthority> extractRealmRoles(Jwt jwt) {
-        Map<String, Object> realmAccess = jwt.getClaim("realm_access");
-        if (realmAccess == null) {
-            return List.of();
-        }
-
-        Object rolesObj = realmAccess.get("roles");
-        if (!(rolesObj instanceof List<?> roles)) {
-            return List.of();
-        }
-
-        return roles.stream()
-                .filter(r -> r instanceof String)
-                .map(r -> new SimpleGrantedAuthority("" + r))
-                .collect(Collectors.toList());
-    }
+    return roles.stream()
+        .filter(r -> r instanceof String)
+        .map(r -> new SimpleGrantedAuthority("" + r))
+        .collect(Collectors.toList());
+  }
 }
