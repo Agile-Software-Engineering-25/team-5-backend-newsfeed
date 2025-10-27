@@ -20,7 +20,7 @@ public class NewsPostCreateDto {
   private List<String> permissions;
   public NewsPost toEntity() {
     NewsPost entity = new NewsPost();
-    entity.setId(this.id); // 'PrePersist' in NewsPost füllt die ID, falls sie null ist
+    entity.setId(id);
     entity.setTitle(title);
     entity.setContent(content);
     entity.setAuthor(author);

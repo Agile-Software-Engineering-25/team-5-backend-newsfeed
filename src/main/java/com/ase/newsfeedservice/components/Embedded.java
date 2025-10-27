@@ -25,7 +25,7 @@ public class Embedded {
     private String body;
 
     public enum ContentFormat {
-      markdown, html
+      html
     }
   }
   @Embeddable
