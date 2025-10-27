@@ -65,16 +65,16 @@ class NewsPostServiceTest {
   }
 
   private static final int PAGE_SIZE = 10;
-  private List<String> groups = List.of("asdf");
+  private List<String> groups = List.of("GROUP_admin");
 
   @Test
   void listNewsPostsShouldReturnPage() {
     Page<NewsPost> page = new PageImpl<>(List.of(new NewsPost()));
-    when(repository.listNewsPosts(any(), any(), any(), any())).thenReturn(page);
+    when(repository.listNewsPosts(any(), any(), any(), any(), groups)).thenReturn(page);
 
     Page<NewsPost> result = service.listNewsPosts(null, null, null, 0, PAGE_SIZE, groups);
 
     assertEquals(1, result.getContent().size());
-    verify(repository).listNewsPosts(any(), any(), any(), any());
+    verify(repository).listNewsPosts(any(), any(), any(), any(), groups);
   }
 }
