@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -61,7 +60,7 @@ public class RootController {
     List<String> groups = List.of();
 
     if ("dev".equalsIgnoreCase(activeProfile)) {
-      groups = List.of("GROUP_admin");
+      groups = List.of("student");
     }
     else {
       Jwt jwt = (Jwt) authentication.getPrincipal();
