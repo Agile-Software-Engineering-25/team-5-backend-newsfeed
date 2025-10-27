@@ -53,13 +53,13 @@ public class NewsPostService {
   }
 
   @Transactional
-  @PreAuthorize("hasAuthority('GROUP_editor')")
+  @PreAuthorize("hasAuthority('Area-2.Team-5.Write.NewsPost-Admin')")
   public NewsPost saveNewsPost(NewsPost newsPost) {
     return repository.save(newsPost);
   }
 
   @Transactional
-  @PreAuthorize("hasAuthority('GROUP_editor')")
+  @PreAuthorize("hasAuthority('Area-2.Team-5.Write.NewsPost-Admin')")
   public NewsPost updateNewsPost(NewsPost newsPost) {
     Objects.requireNonNull(newsPost.getId(), "newsPost.id must not be null");
 
@@ -73,12 +73,13 @@ public class NewsPostService {
   }
 
   @Transactional
-  @PreAuthorize("hasAuthority('GROUP_editor')")
+  @PreAuthorize("hasAuthority('Area-2.Team-5.Write.NewsPost-Admin')")
   public void deleteNewsPost(String id) {
     repository.deleteById(id);
   }
 
   @Transactional(readOnly = true)
+  @PreAuthorize("hasAuthority('Area-2.Team-5.Write.NewsPost-Admin')")
   public List<NewsPostRevisionDto> getNewsPostHistory(String id) {
     // 1. Get the Envers AuditReader
     AuditReader auditReader = AuditReaderFactory.get(entityManager);
@@ -104,7 +105,6 @@ public class NewsPostService {
         .collect(Collectors.toList());
   }
 
-  @PreAuthorize("hasAuthority('GROUP_admin')")
   private NewsPostRevisionDto mapToRevisionDTO(Object[] revision) {
     NewsPost articleAtRevision = (NewsPost) revision[0];
     DefaultRevisionEntity revisionInfo = (DefaultRevisionEntity) revision[1];

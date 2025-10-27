@@ -5,17 +5,27 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
-import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
-// expected jwt
-// {
-//   "sub": "user123",
-//   "groups": ["admin", "editor"],
-//   "exp": 1734300000
-// }
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+
+/*
+Area-2.Team-5.Read.NewsPost-Engineering 
+Area-2.Team-5.Read.NewsPost-Business
+Area-2.Team-5.Read.NewsPost-Chemistry 
+Area-2.Team-5.Read.NewsPost-ComputerScience
+Area-2.Team-5.Write.NewsPost-Admin
+student
+lecturer
+*/
 @Configuration
 @EnableMethodSecurity
 @Profile("!dev")
@@ -23,12 +33,9 @@ public class ProdSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // Normal JWT protection
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/admin/**").hasAuthority("GROUP_admin")
-                .requestMatchers("/editor/**").hasAuthority("GROUP_editor")
-                .requestMatchers("/posts/**").authenticated()
+                .requestMatchers("/**").hasAuthority("Area-2.Team-5.Write.NewsPost-Admin")
                 .anyRequest().denyAll()
             )
             .oauth2ResourceServer(oauth2 -> oauth2
@@ -39,12 +46,25 @@ public class ProdSecurityConfig {
 
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
-        JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        authoritiesConverter.setAuthoritiesClaimName("groups");
-        authoritiesConverter.setAuthorityPrefix("GROUP_");
-
         JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-        converter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
+        converter.setJwtGrantedAuthoritiesConverter(this::extractRealmRoles);
         return converter;
+    }
+
+    private Collection<GrantedAuthority> extractRealmRoles(Jwt jwt) {
+        Map<String, Object> realmAccess = jwt.getClaim("realm_access");
+        if (realmAccess == null) {
+            return List.of();
+        }
+
+        Object rolesObj = realmAccess.get("roles");
+        if (!(rolesObj instanceof List<?> roles)) {
+            return List.of();
+        }
+
+        return roles.stream()
+                .filter(r -> r instanceof String)
+                .map(r -> new SimpleGrantedAuthority("" + r))
+                .collect(Collectors.toList());
     }
 }
