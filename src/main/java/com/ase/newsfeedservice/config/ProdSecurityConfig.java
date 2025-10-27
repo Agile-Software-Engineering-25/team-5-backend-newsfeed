@@ -34,10 +34,10 @@ public class ProdSecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/**").hasAuthority("Area-2.Team-5.Write.NewsPost-Admin")
-            .anyRequest().denyAll())
+        .requestMatchers("/**").hasAuthority("Area-2.Team-5.Write.NewsPost-Admin")
+        .anyRequest().denyAll())
         .oauth2ResourceServer(oauth2 -> oauth2
-            .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
+        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
     return http.build();
   }
 
