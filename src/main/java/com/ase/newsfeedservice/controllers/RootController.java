@@ -61,7 +61,7 @@ public class RootController {
     List<String> groups = List.of();
 
     if ("dev".equalsIgnoreCase(activeProfile)) {
-      groups = List.of("admin");
+      groups = List.of("GROUP_admin");
     }
     else {
       Jwt jwt = (Jwt) authentication.getPrincipal();
