@@ -1,54 +1,92 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: newsfeed-service
+  name: dms-app
+  namespace: ase-7
   labels:
-    app: newsfeed-service
+    app: dms
+    team: "7"
 spec:
-  replicas: 2
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
-      app: newsfeed-service
+      app: dms
   template:
     metadata:
       labels:
-        app: newsfeed-service
+        app: dms
+        team: "7"
     spec:
       containers:
-        - name: newsfeed-service
-          image: ghcr.io/agile-software-engineering-25/team-5-backend-newsfeed:latest
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
-          resources:
-            requests:
-              memory: "256Mi"
-              cpu: "100m"
-            limits:
-              memory: "1Gi"
-              cpu: "300m"
-          readinessProbe:
-            httpGet:
-              path: /newsfeed
-              port: 8080
-            initialDelaySeconds: 120
-            periodSeconds: 5
-          livenessProbe:
-            httpGet:
-              path: /newsfeed
-              port: 8080
-            initialDelaySeconds: 120
-            periodSeconds: 20
-          env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: "prod"
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_USER
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_PASSWORD
+      - name: dms
+        image: ghcr.io/agile-software-engineering-25/team-7-backend-dms:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        # Database Configuration for Team 7 - credentials only
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: backend
+              key: POSTGRES_USER
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: backend
+              key: POSTGRES_PASSWORD
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:postgresql://$(DB_HOST):$(DB_PORT)/$(DB_NAME)"
+        - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+          value: "org.postgresql.Driver"
+
+        envFrom:
+        - configMapRef:
+            name: dms-backend-basic
+
+        volumeMounts:
+        - name: tmp-volume
+          mountPath: /tmp
+
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+
+        livenessProbe:
+          httpGet:
+            path: /dms/actuator/health/liveness
+            port: 8080
+          initialDelaySeconds: 90
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+
+        readinessProbe:
+          httpGet:
+            path: /dms/actuator/health/readiness
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1001
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+
+      volumes:
+      - name: tmp-volume
+        emptyDir: {}
+
+      terminationGracePeriodSeconds: 30
