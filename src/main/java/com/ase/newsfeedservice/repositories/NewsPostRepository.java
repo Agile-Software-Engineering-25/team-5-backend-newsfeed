@@ -16,9 +16,9 @@ public interface NewsPostRepository extends JpaRepository<NewsPost, String> {
         JOIN np.permissions perm
         WHERE 
         (:query IS NULL OR LOWER(np.title) LIKE LOWER(CONCAT('%', :query, '%')) 
-        OR LOWER(np.summary) LIKE LOWER(CONCAT('%', :query, '%')))
-        AND (:from IS NULL OR np.publishDate >= :from)
-        AND (:to IS NULL OR np.publishDate <= :to)
+        OR LOWER(np.content) LIKE LOWER(CONCAT('%', :query, '%')))
+        AND (:from IS NULL OR np.creation_date >= :from)
+        AND (:to IS NULL OR np.creation_date <= :to)
         AND (perm IN :groups)
       """)
   Page<NewsPost> listNewsPosts(

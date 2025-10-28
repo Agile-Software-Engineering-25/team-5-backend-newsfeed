@@ -1,11 +1,6 @@
 spring:
   profiles:
     active: dev
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://your-issuer.com #TODO
   application:
     name: ASE-newsfeedservice
   main:

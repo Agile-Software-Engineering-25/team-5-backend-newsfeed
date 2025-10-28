@@ -9,7 +9,7 @@ public class NewsPostSqlGenerator {
             post.getTitle().replace("'", "''"),
             post.getSummary().replace("'", "''"),
             post.getStatus().name(),
-            post.getCreationDate(),
+            post.getCreation_date(),
             post.getPublishDate(),
             post.getLastModified()
         );

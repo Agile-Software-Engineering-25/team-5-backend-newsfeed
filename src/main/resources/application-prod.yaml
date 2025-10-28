@@ -1,4 +1,9 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://keycloak.sau-portal.de
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false

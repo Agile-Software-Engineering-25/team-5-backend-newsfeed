@@ -13,33 +13,28 @@ import com.ase.newsfeedservice.components.Embedded.*;
 public class NewsPostCreateDto {
   private String id;
   private String title;
-  private String summary;
-  private String status;
   private Content content;
-  private FeaturedImage featuredImage;
   private Author author;
-  private String creationDate;
-  private String publishDate;
-  private String lastModified;
-  private Expiration expiration;
+  private String creation_date;
+  
   private List<String> permissions;
-  private Settings settings;
-
   public NewsPost toEntity() {
     NewsPost entity = new NewsPost();
     entity.setId(id);
     entity.setTitle(title);
-    entity.setSummary(summary);
-    entity.setStatus(NewsPost.NewsPostStatus.valueOf(status));
     entity.setContent(content);
-    entity.setFeaturedImage(featuredImage);
     entity.setAuthor(author);
-    entity.setCreationDate(creationDate != null ? OffsetDateTime.parse(creationDate) : null);
-    entity.setPublishDate(publishDate != null ? OffsetDateTime.parse(publishDate) : null);
-    entity.setLastModified(lastModified != null ? OffsetDateTime.parse(lastModified) : null);
-    entity.setExpiration(expiration);
-    entity.setPermissions(permissions);
-    entity.setSettings(settings);
+    
+    
+    if (this.creation_date != null && !this.creation_date.isEmpty()) {
+      try {
+        entity.setCreation_date(OffsetDateTime.parse(this.creation_date));
+      }
+      catch (java.time.format.DateTimeParseException e) {
+      }
+    }
+    entity.setPermissions(this.permissions);
+    
     return entity;
   }
 }

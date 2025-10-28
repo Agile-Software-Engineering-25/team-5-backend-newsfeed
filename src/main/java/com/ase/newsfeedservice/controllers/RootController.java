@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -36,10 +35,10 @@ public class RootController {
 
   @GetMapping("/")
   public ResponseEntity<String> root() {
-    return ResponseEntity.ok("API Root: /newsfeed");
+    return ResponseEntity.ok("API Root: /api/newsfeed");
   }
 
-  @PostMapping("/newsfeed")
+  @PostMapping("/api/newsfeed")
   public ResponseEntity<NewsPost> create(@RequestBody NewsPost newsPost) {
     NewsPost saved = service.saveNewsPost(newsPost);
     return ResponseEntity.ok(saved);
@@ -47,8 +46,7 @@ public class RootController {
 
   @Value("${spring.profiles.active:}")
   private String activeProfile;
-
-  @GetMapping("/newsfeed")
+  @GetMapping("/api/newsfeed")
   public List<NewsPost> get(
       @RequestParam(required = false) String query,
       @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String from,
@@ -61,7 +59,7 @@ public class RootController {
     List<String> groups = List.of();
 
     if ("dev".equalsIgnoreCase(activeProfile)) {
-      groups = List.of("admin");
+      groups = List.of("sau-admin", "university-administrative-staff");
     }
     else {
       Jwt jwt = (Jwt) authentication.getPrincipal();
@@ -87,20 +85,20 @@ public class RootController {
     return newsPage.getContent();
   }
 
-  @PutMapping("/newsfeed/{id}")
+  @PutMapping("/api/newsfeed/{id}")
   public ResponseEntity<NewsPost> update(@PathVariable String id, @RequestBody NewsPost newsPost) {
     newsPost.setId(id);
     NewsPost updated = service.updateNewsPost(newsPost);
     return ResponseEntity.ok(updated);
   }
 
-  @DeleteMapping("/newsfeed/{id}")
+  @DeleteMapping("/api/newsfeed/{id}")
   public ResponseEntity<Void> delete(@PathVariable String id) {
     service.deleteNewsPost(id);
     return ResponseEntity.noContent().build();
   }
 
-  @GetMapping("/newsfeed/{id}/history")
+  @GetMapping("/api/newsfeed/{id}/history")
   public ResponseEntity<List<NewsPostRevisionDto>> history(@PathVariable String id) {
     return ResponseEntity.ok(service.getNewsPostHistory(id));
   }

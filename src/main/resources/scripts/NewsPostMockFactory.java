@@ -34,7 +34,7 @@ public class NewsPostMockFactory {
         author.setAvatarUrl(faker.internet().avatar());
         post.setAuthor(author);
 
-        post.setCreationDate(OffsetDateTime.now());
+        post.setCreation_date(OffsetDateTime.now());
         post.setPublishDate(OffsetDateTime.now().plusDays(faker.number().numberBetween(1, 30)));
         post.setLastModified(OffsetDateTime.now());
 
