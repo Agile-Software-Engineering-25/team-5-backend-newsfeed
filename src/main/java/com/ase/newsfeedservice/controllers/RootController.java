@@ -59,7 +59,7 @@ public class RootController {
     List<String> groups = List.of();
 
     if ("dev".equalsIgnoreCase(activeProfile)) {
-      groups = List.of("Area-2.Team-5.Write.NewsPost-Admin");
+      groups = List.of("sau-admin", "university-administrative-staff");
     }
     else {
       Jwt jwt = (Jwt) authentication.getPrincipal();

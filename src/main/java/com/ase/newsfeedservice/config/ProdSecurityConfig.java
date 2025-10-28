@@ -21,7 +21,8 @@ Area-2.Team-5.Read.NewsPost-Engineering
 Area-2.Team-5.Read.NewsPost-Business
 Area-2.Team-5.Read.NewsPost-Chemistry 
 Area-2.Team-5.Read.NewsPost-ComputerScience
-Area-2.Team-5.Write.NewsPost-Admin
+sau-admin
+university-administrative-staff
 student
 lecturer
 */
@@ -34,7 +35,8 @@ public class ProdSecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
         .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/**").hasAuthority("Area-2.Team-5.Write.NewsPost-Admin")
+        .requestMatchers("/**").hasAuthority("sau-admin")
+        .requestMatchers("/**").hasAuthority("university-administrative-staff")
         .anyRequest().denyAll())
         .oauth2ResourceServer(oauth2 -> oauth2
         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
