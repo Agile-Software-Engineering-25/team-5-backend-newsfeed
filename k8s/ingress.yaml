@@ -1,21 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: newsfeed-service
+  name: dms
+  namespace: ase-7
   labels:
-    app: newsfeed-service
-  annotations:
-    traefik.ingress.kubernetes.io/rewrite-target: /
+    app: dms
 spec:
   ingressClassName: traefik
   rules:
     - host: sau-portal.de
       http:
         paths:
-          - path: /newsfeed
+          - path: /dms
             pathType: Prefix
             backend:
               service:
-                name: newsfeed-service
+                name: dms
                 port:
                   number: 8080

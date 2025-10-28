@@ -1,15 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: newsfeed-service
+  name: dms
+  namespace: ase-7
   labels:
-    app: newsfeed-service
+    app: dms
 spec:
   selector:
-    app: newsfeed-service
+    app: dms
   ports:
-    - name: http
-      protocol: TCP
+    - protocol: TCP
       port: 8080
       targetPort: 8080
-  type: ClusterIP
