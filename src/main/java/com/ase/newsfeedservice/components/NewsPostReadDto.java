@@ -10,7 +10,7 @@ public class NewsPostReadDto {
   private String title;
   private Content content;
   private Author author;
-  private String creationDate;
+  private String creation_date;
   
 
   public static NewsPostReadDto fromEntity(NewsPost entity) {
@@ -19,7 +19,7 @@ public class NewsPostReadDto {
     dto.setTitle(entity.getTitle());
     dto.setContent(entity.getContent());
     dto.setAuthor(entity.getAuthor());
-    dto.setCreationDate(entity.getCreationDate().toString());
+    dto.setCreation_date(entity.getCreation_date().toString());
 
     return dto;
   }

@@ -44,7 +44,7 @@ public class NewsPost {
   @Embedded
   private Author author;
 
-  private OffsetDateTime creationDate;
+  private OffsetDateTime creation_date;
 
   @ElementCollection(fetch = FetchType.LAZY)
   @CollectionTable(name = "newspost_permissions", joinColumns = @JoinColumn(name = "id"))
@@ -56,8 +56,8 @@ public class NewsPost {
     if (this.id == null) {
       this.id = UUID.randomUUID().toString();
     }
-    if (this.creationDate == null) {
-      this.creationDate = OffsetDateTime.now();
+    if (this.creation_date == null) {
+      this.creation_date = OffsetDateTime.now();
     }
   }
 }

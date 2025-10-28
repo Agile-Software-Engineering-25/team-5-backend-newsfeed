@@ -15,7 +15,7 @@ public class NewsPostCreateDto {
   private String title;
   private Content content;
   private Author author;
-  private String creationDate;
+  private String creation_date;
   
   private List<String> permissions;
   public NewsPost toEntity() {
@@ -26,9 +26,9 @@ public class NewsPostCreateDto {
     entity.setAuthor(author);
     
     
-    if (this.creationDate != null && !this.creationDate.isEmpty()) {
+    if (this.creation_date != null && !this.creation_date.isEmpty()) {
       try {
-        entity.setCreationDate(OffsetDateTime.parse(this.creationDate));
+        entity.setCreation_date(OffsetDateTime.parse(this.creation_date));
       }
       catch (java.time.format.DateTimeParseException e) {
       }

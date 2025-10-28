@@ -34,7 +34,7 @@ public class Embedded {
   @Getter
   @Setter
   public static class Author {
-    private String userId;
+    private String user_id;
     private String name;
   }
 }
