@@ -17,9 +17,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /*
-Area-2.Team-5.Read.NewsPost-Engineering 
+Area-2.Team-5.Read.NewsPost-Engineering
 Area-2.Team-5.Read.NewsPost-Business
-Area-2.Team-5.Read.NewsPost-Chemistry 
+Area-2.Team-5.Read.NewsPost-Chemistry
 Area-2.Team-5.Read.NewsPost-ComputerScience
 sau-admin
 university-administrative-staff
@@ -35,6 +35,7 @@ public class ProdSecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
         .authorizeHttpRequests(auth -> auth
+        .requestMatchers("/actuator/health").permitAll()
         .requestMatchers("/**")
         .hasAnyAuthority("sau-admin", "university-administrative-staff")
         .anyRequest().denyAll())
