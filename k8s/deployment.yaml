@@ -5,7 +5,7 @@ metadata:
   labels:
     app: newsfeed-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: newsfeed-service
@@ -31,13 +31,13 @@ spec:
             httpGet:
               path: /
               port: 8080
-            initialDelaySeconds: 120
+            initialDelaySeconds: 20
             periodSeconds: 5
           livenessProbe:
             httpGet:
               path: /
               port: 8080
-            initialDelaySeconds: 120
+            initialDelaySeconds: 30
             periodSeconds: 20
           env:
             - name: SPRING_PROFILES_ACTIVE
