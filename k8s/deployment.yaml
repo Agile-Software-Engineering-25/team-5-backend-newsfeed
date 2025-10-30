@@ -56,3 +56,7 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: POSTGRES_PASSWORD
+            - name: CLIENT_ID
+              value: "team-5"
+            - name: CLIENT_SECRET
+              value: 7x0IqP2ZTcaoVFVBLrRpq46G1NQVuNf9
