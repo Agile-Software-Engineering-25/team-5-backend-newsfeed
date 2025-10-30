@@ -20,4 +20,4 @@ namespace: ase-5
 
 replicas:
   - name: newsfeed-service
-    count: 2
+    count: 1
