@@ -27,8 +27,6 @@ spec:
             limits:
               memory: "1Gi"
               cpu: "300m"
-          readinessProbe: null
-          livenessProbe: null
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
