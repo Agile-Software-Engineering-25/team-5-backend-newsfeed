@@ -31,24 +31,23 @@ lecturer
 @Profile("!dev")
 public class ProdSecurityConfig {
 
+
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+    JwtAuthenticationConverter jwtConverter = new JwtAuthenticationConverter();
+    jwtConverter.setJwtGrantedAuthoritiesConverter(new JwtAuthConverter());
+
     http
+        .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/actuator/health").permitAll()
+        .requestMatchers("/actuator/health/**").permitAll()
         .requestMatchers("/**")
         .hasAnyAuthority("sau-admin", "university-administrative-staff")
         .anyRequest().denyAll())
         .oauth2ResourceServer(oauth2 -> oauth2
-        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
+        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter)));
     return http.build();
-  }
-
-  @Bean
-  public JwtAuthenticationConverter jwtAuthenticationConverter() {
-    JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-    converter.setJwtGrantedAuthoritiesConverter(this::extractRealmRoles);
-    return converter;
   }
 
   private Collection<GrantedAuthority> extractRealmRoles(Jwt jwt) {

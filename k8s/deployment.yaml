@@ -5,7 +5,7 @@ metadata:
   labels:
     app: newsfeed-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: newsfeed-service
@@ -13,7 +13,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 0
-      maxSurge: 2
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -26,7 +26,12 @@ spec:
           ports:
             - containerPort: 8080
 
-          readinessProbe: null
+          readinessProbe:
+            httpGet:
+              path:
+              port: 8080
+              initialDelaySeconds: 10
+              periodSeconds: 5
 
           livenessProbe: null
 
