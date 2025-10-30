@@ -5,7 +5,7 @@ metadata:
   labels:
     app: newsfeed-service
   annotations:
-    traefik.ingress.kubernetes.io/rewrite-target: /
+    traefik.ingress.kubernetes.io/rewrite-target: /api/newsfeed
 spec:
   ingressClassName: traefik
   rules:
