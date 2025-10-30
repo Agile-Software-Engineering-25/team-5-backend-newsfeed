@@ -20,7 +20,7 @@ spring:
 
 server:
   servlet:
-    context-path: /api/newsfeed
+    context-path: /api
 
 management:
   endpoints:

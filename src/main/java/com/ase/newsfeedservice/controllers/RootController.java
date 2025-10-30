@@ -31,7 +31,7 @@ public class RootController {
 
   private final NewsPostService service;
 
-  @PostMapping("")
+  @PostMapping("/newsfeed")
   public ResponseEntity<NewsPost> create(@RequestBody NewsPost newsPost) {
     NewsPost saved = service.saveNewsPost(newsPost);
     return ResponseEntity.ok(saved);
@@ -40,7 +40,7 @@ public class RootController {
   @Value("${spring.profiles.active:}")
   private String activeProfile;
 
-  @GetMapping("")
+  @GetMapping("/newsfeed")
   public List<NewsPost> get(
       @RequestParam(required = false) String query,
       @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String from,
@@ -76,20 +76,20 @@ public class RootController {
     return newsPage.getContent();
   }
 
-  @PutMapping("/{id}")
+  @PutMapping("/newsfeed/{id}")
   public ResponseEntity<NewsPost> update(@PathVariable String id, @RequestBody NewsPost newsPost) {
     newsPost.setId(id);
     NewsPost updated = service.updateNewsPost(newsPost);
     return ResponseEntity.ok(updated);
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping("/newsfeed/{id}")
   public ResponseEntity<Void> delete(@PathVariable String id) {
     service.deleteNewsPost(id);
     return ResponseEntity.noContent().build();
   }
 
-  @GetMapping("/{id}/history")
+  @GetMapping("/newsfeed/{id}/history")
   public ResponseEntity<List<NewsPostRevisionDto>> history(@PathVariable String id) {
     return ResponseEntity.ok(service.getNewsPostHistory(id));
   }
