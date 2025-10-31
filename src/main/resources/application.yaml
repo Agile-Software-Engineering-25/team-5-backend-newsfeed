@@ -5,6 +5,11 @@ spring:
     name: ASE-newsfeedservice
   main:
     banner-mode: off
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JWT_ISSUER_URI:https://keycloak.sau-portal.de/realms/sau}
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: false
@@ -26,5 +31,8 @@ spring:
       path: /h2-console
 
 server:
+  port: 8080
+  servlet:
+    context-path: /api
   error:
     include-message: always
