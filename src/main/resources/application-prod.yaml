@@ -1,9 +1,13 @@
 spring:
+  profiles:
+    active: prod
+
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://keycloak.sau-portal.de
+          issuer-uri: https://keycloak.sau-portal.de/realms/sau
+          jwk-set-uri: https://keycloak.sau-portal.de/realms/sau/protocol/openid-connect/certs
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false
@@ -20,4 +24,15 @@ spring:
 
 server:
   servlet:
-    context-path: /api
+    context-path: /
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+  server:
+    port: 8080

@@ -5,10 +5,15 @@ metadata:
   labels:
     app: newsfeed-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: newsfeed-service
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -20,6 +25,11 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+
+          readinessProbe: null
+
+          livenessProbe: null
+
           resources:
             requests:
               memory: "256Mi"
