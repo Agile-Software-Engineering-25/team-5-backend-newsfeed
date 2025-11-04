@@ -14,10 +14,10 @@ commonLabels:
   managed-by: kustomize
   app: newsfeed-service
 
-namePrefix: "ase-"
+namePrefix: "ase-5"
 
 namespace: ase-5
 
 replicas:
   - name: newsfeed-service
-    count: 2
+    count: 1
