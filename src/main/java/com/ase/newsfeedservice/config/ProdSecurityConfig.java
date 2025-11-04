@@ -41,7 +41,7 @@ public class ProdSecurityConfig {
     http
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/**").permitAll()
+        .requestMatchers("/**").permitAll())
         .oauth2ResourceServer(oauth2 -> oauth2
         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter)));
     return http.build();
