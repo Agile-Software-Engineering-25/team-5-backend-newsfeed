@@ -59,4 +59,4 @@ spec:
             - name: CLIENT_ID
               value: "team-5"
             - name: CLIENT_SECRET
-              value: 7x0IqP2ZTcaoVFVBLrRpq46G1NQVuNf9
+              value: "7x0IqP2ZTcaoVFVBLrRpq46G1NQVuNf9"

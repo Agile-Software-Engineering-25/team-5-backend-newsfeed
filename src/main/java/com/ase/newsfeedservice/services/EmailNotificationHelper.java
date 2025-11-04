@@ -7,6 +7,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import java.util.List;
 import java.util.Map;
 
 public class EmailNotificationHelper {
@@ -18,8 +19,8 @@ public class EmailNotificationHelper {
   private static final String clientId = System.getenv("CLIENT_ID");
   private static final String clientSecret = System.getenv("CLIENT_SECRET");
 
-  public String emailNotify(NewsPost newsPost) {
-    String jwt = getJwtToken(clientId, clientSecret);
+  public String emailNotify(NewsPost newsPost, List<String> groups) {
+    String jwt = getJwtToken();
 
     Map<String, Object> requestBody = Map.of(
         "title", "Neuer Beitrag im Newsfeed",
@@ -30,7 +31,7 @@ public class EmailNotificationHelper {
     );
 
     // idk ob das permissions array nur die groups hält
-    requestBody.put("groups", newsPost.getPermissions());
+    requestBody.put("groups", groups);
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
