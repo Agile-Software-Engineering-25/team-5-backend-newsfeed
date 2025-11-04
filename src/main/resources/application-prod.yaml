@@ -1,7 +1,4 @@
 spring:
-  profiles:
-    active: prod
-
   security:
     oauth2:
       resourceserver:
