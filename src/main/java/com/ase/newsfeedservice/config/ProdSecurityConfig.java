@@ -41,10 +41,7 @@ public class ProdSecurityConfig {
     http
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/actuator/health/**").permitAll()
-        .requestMatchers("/**")
-        .hasAnyAuthority("sau-admin", "university-administrative-staff")
-        .anyRequest().denyAll())
+        .requestMatchers("/**").permitAll()
         .oauth2ResourceServer(oauth2 -> oauth2
         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter)));
     return http.build();
