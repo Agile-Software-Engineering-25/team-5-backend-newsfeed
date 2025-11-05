@@ -12,6 +12,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
+        ddl-auto: create-drop
         format_sql: true
   datasource:
     url: jdbc:postgresql://postgres.db:5432/appdb
