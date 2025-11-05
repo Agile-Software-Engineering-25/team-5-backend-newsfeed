@@ -24,7 +24,7 @@ public interface NewsPostRepository extends JpaRepository<NewsPost, String> {
       @Param("query") String query,
       @Param("from") OffsetDateTime from,
       @Param("to") OffsetDateTime to,
-      @Param("groups") List<String> groups
-      Pageable pageable,
+      @Param("groups") List<String> groups,
+      Pageable pageable
     );
 }
