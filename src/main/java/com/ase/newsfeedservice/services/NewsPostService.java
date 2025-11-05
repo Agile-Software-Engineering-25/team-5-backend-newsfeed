@@ -38,13 +38,13 @@ public class NewsPostService {
   @Autowired
   private EntityManager entityManager;
   private final NewsPostRepository repository;
-  
+
   @Transactional(readOnly = true)
   public Page<NewsPost> listNewsPosts(
-      String query, 
-      OffsetDateTime from, 
-      OffsetDateTime to, 
-      int page, 
+      String query,
+      OffsetDateTime from,
+      OffsetDateTime to,
+      int page,
       int pageSize,
       List<String> groups
   ) {
