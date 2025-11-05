@@ -49,9 +49,6 @@ public class NewsPostService {
       List<String> groups
   ) {
     Pageable pageable = PageRequest.of(page, pageSize);
-    repository.listNewsPosts(query, from, to, pageable, groups).forEach(np -> {
-      System.out.println("NewsPost ID: " + np.getId() + ", Title: " + np.getTitle());
-    });
     return repository.listNewsPosts(query, from, to, pageable, groups);
   }
 
