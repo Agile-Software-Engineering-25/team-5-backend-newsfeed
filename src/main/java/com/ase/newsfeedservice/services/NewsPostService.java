@@ -38,17 +38,20 @@ public class NewsPostService {
   @Autowired
   private EntityManager entityManager;
   private final NewsPostRepository repository;
-  
+
   @Transactional(readOnly = true)
   public Page<NewsPost> listNewsPosts(
-      String query, 
-      OffsetDateTime from, 
-      OffsetDateTime to, 
-      int page, 
+      String query,
+      OffsetDateTime from,
+      OffsetDateTime to,
+      int page,
       int pageSize,
       List<String> groups
   ) {
     Pageable pageable = PageRequest.of(page, pageSize);
+    repository.listNewsPosts(query, from, to, pageable, groups).forEach(np -> {
+      System.out.println("NewsPost ID: " + np.getId() + ", Title: " + np.getTitle());
+    });
     return repository.listNewsPosts(query, from, to, pageable, groups);
   }
 
