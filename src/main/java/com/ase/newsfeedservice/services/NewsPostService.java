@@ -22,6 +22,7 @@ import com.ase.newsfeedservice.exceptions.NewsPostNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,11 +47,25 @@ public class NewsPostService {
       OffsetDateTime to,
       int page,
       int pageSize,
-      List<String> groups
-  ) {
+      List<String> groups) {
     Pageable pageable = PageRequest.of(page, pageSize);
-    String pattern = (query == null || query.isBlank()) ? null : "%" + query + "%";
-    return repository.listNewsPosts(pattern, from, to, groups, pageable);
+
+    Specification<NewsPost> spec = Specification.where(null);
+
+    if (query != null && !query.isBlank()) {
+      spec = spec.and((root, q, cb) -> cb.like(cb.lower(root.get("title")), "%" + query.toLowerCase() + "%"));
+    }
+    if (from != null) {
+      spec = spec.and((root, q, cb) -> cb.greaterThanOrEqualTo(root.get("creation_date"), from));
+    }
+    if (to != null) {
+      spec = spec.and((root, q, cb) -> cb.lessThanOrEqualTo(root.get("creation_date"), to));
+    }
+    if (groups != null && !groups.isEmpty()) {
+      spec = spec.and((root, q, cb) -> root.join("permissions").in(groups));
+    }
+
+    return repository.findAll(spec, pageable);
   }
 
   @Transactional
@@ -67,7 +82,8 @@ public class NewsPostService {
     NewsPost existingPost = repository.findById(newsPost.getId())
         .orElseThrow(() -> new NewsPostNotFoundException(newsPost.getId()));
 
-    // Achtung: überschreibt auch mit null -> ok, wenn ihr "vollständige Updates" wollt
+    // Achtung: überschreibt auch mit null -> ok, wenn ihr "vollständige Updates"
+    // wollt
     BeanUtils.copyProperties(newsPost, existingPost, "id", "version");
 
     return repository.save(existingPost);
@@ -85,7 +101,8 @@ public class NewsPostService {
     // 1. Get the Envers AuditReader
     AuditReader auditReader = AuditReaderFactory.get(entityManager);
 
-    // 2. Create an audit query to find all revisions for the Article entity, ordered by revision number.
+    // 2. Create an audit query to find all revisions for the Article entity,
+    // ordered by revision number.
     AuditQuery auditQuery = auditReader.createQuery()
         .forRevisionsOfEntity(NewsPost.class, false, true)
         .add(AuditEntity.id().eq(id))
