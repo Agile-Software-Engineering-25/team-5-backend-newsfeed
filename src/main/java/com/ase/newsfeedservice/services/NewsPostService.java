@@ -49,7 +49,8 @@ public class NewsPostService {
       List<String> groups
   ) {
     Pageable pageable = PageRequest.of(page, pageSize);
-    return repository.listNewsPosts(query, from, to, groups, pageable);
+    String pattern = (query == null || query.isBlank()) ? null : "%" + query + "%";
+    return repository.listNewsPosts(pattern, from, to, groups, pageable);
   }
 
   @Transactional
