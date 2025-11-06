@@ -15,11 +15,11 @@ public interface NewsPostRepository extends JpaRepository<NewsPost, String> {
         SELECT DISTINCT np FROM NewsPost np
         JOIN np.permissions perm
         WHERE
-        (:from IS NULL OR np.creation_date >= :from)
+        (:query IS NULL OR np.title ILIKE CONCAT('%', :query, '%'))
+        AND (:from IS NULL OR np.creation_date >= :from)
         AND (:to IS NULL OR np.creation_date <= :to)
         AND (perm IN :groups)
         """)
-        // (:query IS NULL OR LOWER(np.title) LIKE LOWER(CONCAT('%', :query, '%')))
   Page<NewsPost> listNewsPosts(
       @Param("query") String query,
       @Param("from") OffsetDateTime from,
