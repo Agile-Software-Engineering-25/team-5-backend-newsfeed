@@ -6,6 +6,7 @@ import com.ase.newsfeedservice.repositories.NewsPostRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import java.util.*;
 

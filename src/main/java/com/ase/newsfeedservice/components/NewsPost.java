@@ -36,6 +36,7 @@ public class NewsPost {
   @Column(nullable = false, updatable = false)
   private String id;
 
+  @Column(columnDefinition = "TEXT")
   private String title;
 
   @Embedded

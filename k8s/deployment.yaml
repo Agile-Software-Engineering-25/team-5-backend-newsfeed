@@ -5,10 +5,15 @@ metadata:
   labels:
     app: newsfeed-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: newsfeed-service
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -20,6 +25,11 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+
+          readinessProbe: null
+
+          livenessProbe: null
+
           resources:
             requests:
               memory: "256Mi"
@@ -27,22 +37,6 @@ spec:
             limits:
               memory: "1Gi"
               cpu: "300m"
-          readinessProbe:
-            httpGet:
-              path: /api/newsfeed/actuator/health
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
-          livenessProbe:
-            httpGet:
-              path: /api/newsfeed/actuator/health
-              port: 8080
-            initialDelaySeconds: 120
-            periodSeconds: 20
-            timeoutSeconds: 5
-            failureThreshold: 3
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"

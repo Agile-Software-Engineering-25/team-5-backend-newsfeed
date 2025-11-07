@@ -1,10 +1,15 @@
 spring:
   profiles:
-    active: dev
+    active: ${SPRING_PROFILES_ACTIVE:dev}
   application:
     name: ASE-newsfeedservice
   main:
     banner-mode: off
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JWT_ISSUER_URI:https://keycloak.sau-portal.de/realms/sau}
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: false
@@ -28,16 +33,6 @@ spring:
 server:
   port: 8080
   servlet:
-    context-path: /api/newsfeed
+    context-path: /api
   error:
     include-message: always
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,metrics
-      base-path: /actuator
-  endpoint:
-    health:
-      show-details: when-authorized

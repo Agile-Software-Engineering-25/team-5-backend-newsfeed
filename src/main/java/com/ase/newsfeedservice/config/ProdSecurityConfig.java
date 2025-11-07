@@ -17,9 +17,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /*
-Area-2.Team-5.Read.NewsPost-Engineering 
+Area-2.Team-5.Read.NewsPost-Engineering
 Area-2.Team-5.Read.NewsPost-Business
-Area-2.Team-5.Read.NewsPost-Chemistry 
+Area-2.Team-5.Read.NewsPost-Chemistry
 Area-2.Team-5.Read.NewsPost-ComputerScience
 sau-admin
 university-administrative-staff
@@ -31,23 +31,20 @@ lecturer
 @Profile("!dev")
 public class ProdSecurityConfig {
 
-  @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-        .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/**")
-        .hasAnyAuthority("sau-admin", "university-administrative-staff")
-        .anyRequest().denyAll())
-        .oauth2ResourceServer(oauth2 -> oauth2
-        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));
-    return http.build();
-  }
 
   @Bean
-  public JwtAuthenticationConverter jwtAuthenticationConverter() {
-    JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-    converter.setJwtGrantedAuthoritiesConverter(this::extractRealmRoles);
-    return converter;
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+    JwtAuthenticationConverter jwtConverter = new JwtAuthenticationConverter();
+    jwtConverter.setJwtGrantedAuthoritiesConverter(new JwtAuthConverter());
+
+    http
+        .csrf(csrf -> csrf.disable())
+        .authorizeHttpRequests(auth -> auth
+        .requestMatchers("/**").permitAll())
+        .oauth2ResourceServer(oauth2 -> oauth2
+        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtConverter)));
+    return http.build();
   }
 
   private Collection<GrantedAuthority> extractRealmRoles(Jwt jwt) {

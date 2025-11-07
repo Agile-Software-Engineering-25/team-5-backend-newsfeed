@@ -3,7 +3,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://keycloak.sau-portal.de
+          issuer-uri: https://keycloak.sau-portal.de/realms/sau
+          jwk-set-uri: https://keycloak.sau-portal.de/realms/sau/protocol/openid-connect/certs
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false
@@ -11,6 +12,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
+        ddl-auto: create-drop
         format_sql: true
   datasource:
     url: jdbc:postgresql://postgres.db:5432/appdb
@@ -20,15 +22,15 @@ spring:
 
 server:
   servlet:
-    context-path: /api/newsfeed
+    context-path: /api
 
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
-      base-path: /actuator
+        include: health
   endpoint:
     health:
-      show-details: always
-      show-components: always
+      show-details: never
+  server:
+    port: 8080
