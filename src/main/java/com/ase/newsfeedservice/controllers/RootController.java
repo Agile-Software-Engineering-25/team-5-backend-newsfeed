@@ -2,6 +2,7 @@ package com.ase.newsfeedservice.controllers;
 
 import com.ase.newsfeedservice.components.NewsPost;
 import com.ase.newsfeedservice.components.NewsPostRevisionDto;
+import com.ase.newsfeedservice.services.EmailNotificationHelper;
 import com.ase.newsfeedservice.services.NewsPostService;
 import lombok.RequiredArgsConstructor;
 
@@ -30,10 +31,12 @@ import java.util.List;
 public class RootController {
 
   private final NewsPostService service;
+  private final EmailNotificationHelper emailNotificationHelper = new EmailNotificationHelper();
 
   @PostMapping("/newsfeed")
   public ResponseEntity<NewsPost> create(@RequestBody NewsPost newsPost) {
     NewsPost saved = service.saveNewsPost(newsPost);
+    emailNotificationHelper.emailNotify(newsPost);
     return ResponseEntity.ok(saved);
   }
 

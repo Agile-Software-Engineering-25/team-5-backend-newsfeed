@@ -19,34 +19,38 @@ public class EmailNotificationHelper {
   private static final String clientId = System.getenv("CLIENT_ID");
   private static final String clientSecret = System.getenv("CLIENT_SECRET");
 
-  public String emailNotify(NewsPost newsPost, List<String> groups) {
-    String jwt = getJwtToken();
-
+  public String emailNotify(NewsPost newsPost) {
+    String jwt;
+    ResponseEntity<String> response;
     Map<String, Object> requestBody = Map.of(
         "title", "Neuer Beitrag im Newsfeed",
         "message", "Es wurde ein neuer Beitrag veröffentlicht: " + newsPost.getTitle(),
         "notifyType", "All",
         "notificationType", "Info",
-        "groups", ""
+        "groups", List.of("HVS-Admin", "Student")
     );
 
-    // idk ob das permissions array nur die groups hält
-    requestBody.put("groups", groups);
+    if(clientId != null && clientSecret != null) {
 
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
-    headers.setBearerAuth(jwt);
+      jwt = getJwtToken();
 
-    HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
+      HttpHeaders headers = new HttpHeaders();
+      headers.setContentType(MediaType.APPLICATION_JSON);
+      headers.setBearerAuth(jwt);
 
-    ResponseEntity<String> response = restTemplate.exchange(
-        API_URL,
-        HttpMethod.POST,
-        entity,
-        String.class
-    );
+      HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
 
-    return response.getBody();
+      response = restTemplate.exchange(
+          API_URL,
+          HttpMethod.POST,
+          entity,
+          String.class
+      );
+      return response.getBody();
+
+    } else {
+      return "no CLIENT_ID or CLIENT_SECRET set";
+    }
   }
 
   private String getJwtToken() {
